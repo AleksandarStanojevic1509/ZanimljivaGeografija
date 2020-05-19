@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZanimljivaGeografija</title>
+    <link rel="icon" href="img/icon.png" />
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="app.js" ></script>
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+
+<!-- MODAL -->
+    <div id='modal-bck'>
+        <div id="log-in">
+            <div>
+                <img src="/img/icon.png" alt="">    
+            </div>
+                <form>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate">
+                        <label  for="last_name">Username</label>
+                    </div>
+                    <input class="" type="submit" value="Log in">
+                </form>
+            </div>
+    </div>
+
+<!-- HEAER -->
+    <header>
+        <h1>Zanimljiva Geografija</h1>
+    </header>
+
+
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js" ></script>
+    <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js" ></script>
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyAxqHAm6VxnEMSHVWDCsbRyeaumMsvjckQ",
+        authDomain: "zanimljivageografija-f1e43.firebaseapp.com",
+        databaseURL: "https://zanimljivageografija-f1e43.firebaseio.com",
+        projectId: "zanimljivageografija-f1e43",
+        storageBucket: "zanimljivageografija-f1e43.appspot.com",
+        messagingSenderId: "533867822250",
+        appId: "1:533867822250:web:907b05933ab4748f1b64d3"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    </script>
+</body>
+</html>
