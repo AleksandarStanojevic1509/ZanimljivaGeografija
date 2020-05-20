@@ -1,0 +1,236 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(228, 228, 228);
+}
+
+/* MODAL */
+
+#modal-bck {
+  background-color:  #47cec1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  display: block;
+}
+
+#log-in {
+  left: 0;
+  right: 0;
+  padding: 0 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  background-color: rgb(255, 255, 255) !important;
+  width: 28rem;
+  height: 22rem;
+  margin: 0 auto;
+  z-index: 10;
+  margin-top: 8.5rem;
+  display: grid; /*grid*/
+  grid-template-rows: 3fr 3fr;
+  -webkit-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  -moz-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+}
+#log-in div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#log-in img {
+  width: 10rem;
+  padding: 1rem 0;
+}
+
+#log-in form {
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+}
+/* #log-in form div {
+  width: 80%;
+  margin: auto;
+} */
+/* input[type="submit"] {
+  width: 30%;
+  margin: auto;
+  padding: 5px;
+  background-color: #26a69a;
+  border: none;
+  font-size: 1.2rem;
+  border-radius: 2px;
+}
+input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #47cec0;
+} */
+#user-label{
+  line-height: 2.5 !important;
+}
+#close{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -1rem;
+  margin-right: 0.3rem;
+  font-size: 3rem;
+  transform: rotateZ(45deg);
+  color: #26a69a;
+}
+#close:hover{
+  cursor: pointer;
+}
+
+/* alert */
+
+#alert-modal-bck {
+  background-color:  #47cec1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 5;
+}
+
+#alert{
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  background-color: rgb(255, 255, 255) !important;
+  width: 28rem;
+  height: 22rem;
+  margin: 0 auto;
+  z-index: 10;
+  margin-top: 8.5rem;
+  display: grid; /*grid*/
+  grid-template-rows: 3fr 3fr;
+  -webkit-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  -moz-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+}
+#alert div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#alert img {
+  width: 10rem;
+  padding: 1rem 0;
+}
+
+#close{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -1rem;
+  margin-right: 0.3rem;
+  font-size: 3rem;
+  transform: rotateZ(45deg);
+  color: #26a69a;
+}
+#close:hover{
+  cursor: pointer;
+}
+button{
+  width: 30%;
+  margin: auto;
+  padding: 5px;
+  background-color: #26a69a;
+  border: none;
+  font-size: 1.2rem;
+  border-radius: 2px;
+}
+
+/* HEADER */
+header{
+  width: 100%;
+  text-align: center;
+  background-color: #47cec0 ;
+  display: grid !important;
+  height: 10vh;
+  grid-template-columns: 1fr 5fr 1fr;
+}
+header div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#switch-box{
+  flex-direction: column;
+}
+header div span{
+  font-weight: 800;
+}
+h1{
+  margin: 0 !important;
+  padding: 1rem 0;
+}
+header i{
+  font-size: 4rem !important;
+}
+header i:hover{
+  font-size: 4rem;
+  cursor: pointer;
+  animation: rollSwitch 1.5s ease-out 0s alternate infinite none running;
+  
+}
+/* MAIN */
+#main-form{  
+  margin: 2rem auto ;
+  padding: 0 2rem;
+  background-color: rgb(255, 255, 255) !important;
+  width: 28rem;
+  height: 22rem;
+  -webkit-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  -moz-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  display: grid;
+  grid-template-rows: 2fr 2fr 1fr;
+}
+
+#main-form div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#main-form label{
+  line-height: 5rem;
+}
+option{
+  text-transform: capitalize;
+}
+/* FOOTER */
+footer{
+  width: 100%;
+  display: flex; 
+  justify-content: space-around;
+}
+footer div{
+  width: 28rem; 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 1rem;
+  margin: auto;
+}
+.HoF{
+  width: 100%;
+}
+
+/* kayframes */
+@keyframes rollSwitch {
+  0%   {transform: rotateZ(45deg);}
+  25%  {transform: rotateZ(90deg);}
+  50%  {transform: rotateZ(180deg);}
+  100% {transform: rotateZ(360deg);}
+}

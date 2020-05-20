@@ -17,54 +17,89 @@
     <!-- MODAL -->
     <div id='modal-bck'>
         <div id="log-in">
+            <p id = 'close'>+</p>
             <div>
-                <img src="/img/icon.png" alt="">    
+                <img src="/public/img/icon.png" alt="">    
             </div>
             <form>
                 <div class="input-field col s6">
                     <input id="username" type="text" class="validate">
                     <label id="user-label" for="username">Username</label>
                 </div>
-                <input id="log-in-submit" type="submit" value="Log in">
+                <div>
+                    <button style="width: 100%;" id="log-in-submit" class="waves-effect waves-light btn-small">Log in</button>
+                </div>
+                <!-- <input id="log-in-submit" type="submit" value="Log in"> -->
             </form>
+        </div>
+    </div>
+
+    <div id='alert-modal-bck'>
+        <div id="alert">
+            <div>
+                <img src="/public/img/icon.png" alt="">    
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: space-around;">
+                <h3 style="margin: 0;">Oops...</h3>
+                <h5 style="margin: 0;"></h5>
+                <button class="waves-effect waves-light btn-small">OK</button>
+            </div>
         </div>
     </div>
     
     <!-- HEAER -->
     <header>
-        <h1>Zanimljiva Geografija</h1>
-        <i class="material-icons">sync</i>
+        <div>
+            <p>Hi, Anonymus</p>
+        </div>
+        <div>
+            <h1>Geography game</h1>
+        </div>
+        <div id="switch-box">
+            <i class="material-icons">sync</i>
+            <p>Switch user</p>
+        </div>
+        
+        
     </header>
-
+    <div>
+        
+    </div>
     <form id="main-form">
         <div class="input-field col s6">
             <input id="add-new-term" type="text" class="validate">
-            <label for="add-new-term">Unesi pojam</label>
-        </div>
-        
-        <div>
-            <input placeholder="Izaberi kategoriju" list="cat-opt" id="category"> 
-            <datalist id="cat-opt"> 
-                <option>Drzava</option> 
-                <option>Grad</option> 
-                <option>Reka</option> 
-                <option>Planina</option> 
-                <option>Zivotinja</option> 
-                <option>Biljka</option> 
-                <option>Predmet</option> 
-            </datalist> 
+            <label for="add-new-term">Enter term...</label>
         </div>
 
-   
-        <input id='submit' type="submit" value="Add to DB">
+        <div>
+            <input placeholder="Choose category..." list="category-opt" id="cat-opt">
+            <datalist id="category-opt">
+                <option>Država</option>
+                <option>Grad</option>
+                <option>Reka</option> 
+                <option>Planina</option> 
+                <option>Životinja</option> 
+                <option>Biljka</option> 
+                <option>Predmet</option> 
+            </datalist>
+        </div>
+        <button class="HoF waves-effect waves-light btn-small" id='submit'>Add to DB</button>
+        <!-- <input id='submit' type="submit" value="Add to DB"> -->
     </form>
+
+    <footer>
+        <div>
+            <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-first">Hall Of Fame</button>
+            <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-second">Hall Of Fame</button>
+        </div>
+    </footer>
     
     
     
     
     
     
-    <script src="app.js"></script>
+    <script src="app.js" type="module"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js" ></script>
     <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js" ></script>
     <script>

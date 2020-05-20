@@ -1,47 +1,38 @@
+import {showModal, fixInputValue, checkUser, alertBox} from "./module.js"
+
 const modal = document.getElementById ('modal-bck');
 const modalForm = document.querySelector('#log-in form');
 const inputValue = document.getElementById('username');
 const switchUser = document.querySelector('header i');
 const mainFormHandler = document.getElementById('submit');
 const inputText = document.getElementById('add-new-term');
-const inputCategory = document.getElementById('category');
+const inputCategory = document.getElementById('cat-opt');
+const closeBtn = document.getElementById('close')
+const alertModal = document.querySelector('#alert-modal-bck ')
+const alertMsg = document.querySelector('#alert-modal-bck h5')
+const btn = document.querySelector ('#alert button')
 
-const showModal = (modalForm, inputValue, modal)=>{
-    modalForm.addEventListener('submit', (event)=>{
-        if  (inputValue.value === ''){
-            alert ('Mora se uneti korisnicko ime!!'); //napraviti kasvetan alert
-        }
-        else {
-            event.preventDefault();
-            localStorage.setItem('username', `${inputValue.value}`); 
-            modal.style.display = 'none';
-            
-        }
-    })
-    
-}
 
-const fixInputValue = (inputText)=>{
-    let suggestedTerm = inputText.value;
-    suggestedTerm = suggestedTerm.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
-    let firstLetter = suggestedTerm.slice(0,1).toUpperCase();
-    let restLetters = suggestedTerm.slice(1);
-    return firstLetter + restLetters;
-}
+
+
         
+checkUser(modalForm, inputValue, modal)
 
-if(localStorage.getItem('username') === null) {
-    showModal(modalForm, inputValue, modal);
-}
-else if (localStorage.getItem('username') !== null){
-    modal.style.display = 'none';
-}
+btn.addEventListener('click', ()=>{
+    alertModal.style.display = 'none';
+
+})
 
 switchUser.addEventListener('click', ()=>{
     modal.style.display = 'block';
     inputValue.value = '';
-    showModal(modalForm, inputValue, modal);
+    showModal(modalForm, inputValue, modal);    
 })
+
+closeBtn.addEventListener('click', ()=>{
+    modal.style.display = 'none';
+})
+
 
 
 mainFormHandler.addEventListener('click', (event)=>{
@@ -56,7 +47,7 @@ mainFormHandler.addEventListener('click', (event)=>{
     .then((querySnapshot) => {
         if (querySnapshot.size > 0) {
         querySnapshot.docs.forEach((doc) => {
-        alert ('Pojam postoji') // napraviti kasvetni alet
+            alertBox(alertModal, alertMsg, 'Term is already exist!!!')
         }) 
         } 
         else {
@@ -68,11 +59,13 @@ mainFormHandler.addEventListener('click', (event)=>{
                 pojam:fixedTerm,
                 vreme:firebase.firestore.Timestamp.fromDate(date)
             })
+            alertBox(alertModal, alertMsg, 'Term added to DB!!!')
         }
       })
       .catch((error) => {
         console.log("Error getting document: ", error);
       });
+      console.log('aaa')
       inputText.value = ''
       inputCategory.value = ''
 })
