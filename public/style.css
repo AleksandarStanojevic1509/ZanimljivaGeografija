@@ -21,6 +21,8 @@ body {
 }
 
 #log-in {
+  animation: bounceInDown; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 1s; /* don't forget to set a duration! */
   left: 0;
   right: 0;
   padding: 0 2rem;
@@ -101,6 +103,8 @@ input[type="submit"]:hover {
 }
 
 #alert{
+  animation: bounceInDown; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 1s; /* don't forget to set a duration! */
   left: 0;
   right: 0;
   margin-left: auto;
@@ -151,13 +155,56 @@ button{
   border-radius: 2px;
 }
 
+/* hall */
+#hall-modal-bck {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 5;
+}
+
+#hall{
+  animation: bounceInDown; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 1s; /* don't forget to set a duration! */
+  left: 0;
+  right: 0;
+  padding: 0 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  background-color: rgb(255, 255, 255) !important;
+  width: 28rem;
+  height: 24rem;
+  margin: 0 auto;
+  z-index: 10;
+  margin-top: 8.5rem;
+  display: grid; /*grid*/
+  grid-template-rows: 1fr 5fr 1fr;
+  -webkit-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  -moz-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+}
+#hall button{
+  width: 100%;
+}
+#hall h4{
+  text-align: center;
+  border-bottom: 2px solid #47cec0 ;
+}
+th, td{
+  padding: 0.3rem !important;
+}
+
 /* HEADER */
 header{
   width: 100%;
   text-align: center;
   background-color: #47cec0 ;
   display: grid !important;
-  height: 10vh;
+  height: 12vh;
   grid-template-columns: 1fr 5fr 1fr;
 }
 header div{
@@ -181,7 +228,7 @@ header i{
 header i:hover{
   font-size: 4rem;
   cursor: pointer;
-  animation: rollSwitch 1.5s ease-out 0s alternate infinite none running;
+  animation: rotateIn 1.5s ease-out 0s alternate infinite none running;
   
 }
 /* MAIN */

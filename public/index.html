@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZanimljivaGeografija</title>
+    <title>geographyGame</title>
     <link rel="icon" href="img/icon.png" />
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -17,7 +18,7 @@
     <!-- MODAL -->
     <div id='modal-bck'>
         <div id="log-in">
-            <p id = 'close'>+</p>
+            <!-- <p id = 'close'>+</p> -->
             <div>
                 <img src="/public/img/icon.png" alt="">    
             </div>
@@ -40,10 +41,56 @@
                 <img src="/public/img/icon.png" alt="">    
             </div>
             <div style="display: flex; flex-direction: column; justify-content: space-around;">
-                <h3 style="margin: 0;">Oops...</h3>
+                <h3 style="margin: 0;"></h3>
                 <h5 style="margin: 0;"></h5>
-                <button class="waves-effect waves-light btn-small">OK</button>
+                <button class="btn" class="waves-effect waves-light btn-small">OK</button>
             </div>
+        </div>
+    </div>
+
+    <div id='hall-modal-bck'>
+        <div id="hall">
+            <h4>Hall Of Fame</h4>
+            <div>
+                <table class="centered">
+                    <thead>
+                      <tr>
+                          <th>No:</th>
+                          <th>Name</th>
+                          <th>Terms</th>
+                      </tr>
+                    </thead>
+            
+                    <tbody>
+                      <tr>
+                        <td>1.</td>
+                        <td id="hall-firs">John</td>
+                        <td>55</td>
+                      </tr>
+                      <tr>
+                        <td>2.</td>
+                        <td id="hall-second">Mark</td>
+                        <td>76</td>
+                      </tr>
+                      <tr>
+                        <td>3.</td>
+                        <td id="hall-third">Peter</td>
+                        <td>70</td>
+                      </tr>
+                      <tr>
+                        <td>4.</td>
+                        <td id="hall-fourth">Dan</td>
+                        <td>37</td>
+                      </tr>
+                      <tr>
+                        <td>5.</td>
+                        <td id="hall-fifth">Alex</td>
+                        <td>60</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <button class="btn" class="waves-effect waves-light btn-small">OK</button>
         </div>
     </div>
     
@@ -105,13 +152,14 @@
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
-            apiKey: "AIzaSyAxqHAm6VxnEMSHVWDCsbRyeaumMsvjckQ",
-        authDomain: "zanimljivageografija-f1e43.firebaseapp.com",
-        databaseURL: "https://zanimljivageografija-f1e43.firebaseio.com",
-        projectId: "zanimljivageografija-f1e43",
-        storageBucket: "zanimljivageografija-f1e43.appspot.com",
-        messagingSenderId: "533867822250",
-        appId: "1:533867822250:web:907b05933ab4748f1b64d3"
+            apiKey: "AIzaSyCiYRBfXZSEImfV9uqwhqK_8oDP18WTMts",
+            authDomain: "zgeografija-6db02.firebaseapp.com",
+            databaseURL: "https://zgeografija-6db02.firebaseio.com",
+            projectId: "zgeografija-6db02",
+            storageBucket: "zgeografija-6db02.appspot.com",
+            messagingSenderId: "378635864704",
+            appId: "1:378635864704:web:a5df44ec282359260e3465",
+            measurementId: "G-SW0L7YNFXL"
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);

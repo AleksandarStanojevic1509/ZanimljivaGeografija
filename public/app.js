@@ -1,4 +1,4 @@
-import {showModal, fixInputValue, checkUser, alertBox} from "./module.js"
+import {showModal, fixInputValue, checkUser, alertBox, hallBox} from "./module.js"
 
 const modal = document.getElementById ('modal-bck');
 const modalForm = document.querySelector('#log-in form');
@@ -7,20 +7,26 @@ const switchUser = document.querySelector('header i');
 const mainFormHandler = document.getElementById('submit');
 const inputText = document.getElementById('add-new-term');
 const inputCategory = document.getElementById('cat-opt');
-const closeBtn = document.getElementById('close')
-const alertModal = document.querySelector('#alert-modal-bck ')
-const alertMsg = document.querySelector('#alert-modal-bck h5')
-const btn = document.querySelector ('#alert button')
+// const closeBtn = document.getElementById('close');
+const alertModal = document.querySelector('#alert-modal-bck ');
+const alertMsg = document.querySelector('#alert-modal-bck h5');
+const alertTitle = document.querySelector('#alert-modal-bck h3');
+const btnAlert = document.querySelector ('#alert button');
+const btnHall = document.querySelector ('#hall button');
+const hOfBtnOneHandler = document.getElementById('hall-of-fame-first');
+const hOfBox = document.getElementById('hall-modal-bck')
 
 
 
-
-        
 checkUser(modalForm, inputValue, modal)
 
-btn.addEventListener('click', ()=>{
+btnAlert.addEventListener('click', ()=>{
     alertModal.style.display = 'none';
-
+    
+})
+btnHall.addEventListener('click', ()=>{
+    hOfBox.style.display = 'none';
+    
 })
 
 switchUser.addEventListener('click', ()=>{
@@ -29,43 +35,64 @@ switchUser.addEventListener('click', ()=>{
     showModal(modalForm, inputValue, modal);    
 })
 
-closeBtn.addEventListener('click', ()=>{
-    modal.style.display = 'none';
+// closeBtn.addEventListener('click', ()=>{
+//     modal.style.display = 'none';
+// })
+
+hOfBtnOneHandler.addEventListener('click', ()=>{
+    console.log('hall')
+    hallBox(hOfBox)
 })
-
-
 
 mainFormHandler.addEventListener('click', (event)=>{
     event.preventDefault();
     const fixedTerm = fixInputValue (inputText); 
     const category = inputCategory.value;  
     console.log(fixedTerm, category);
+    
+    if (fixedTerm === '' && category === '') return
 
     db.collection("pojmovi")
     .where("pojam", "==", `${fixedTerm}`)
     .get()
     .then((querySnapshot) => {
         if (querySnapshot.size > 0) {
-        querySnapshot.docs.forEach((doc) => {
-            alertBox(alertModal, alertMsg, 'Term is already exist!!!')
+            querySnapshot.docs.forEach((doc) => {
+            alertBox(alertModal, alertMsg, alertTitle, 'Term is already exist!!!', 'Oops...')
         }) 
-        } 
-        else {
+    } 
+    else {
             const date = new Date();
             db.collection('pojmovi').doc().set({
                 kategorija: category,
                 korisnik: localStorage.getItem('username'),
-                pocetnoSLovo: fixedTerm.slice(0,1),
+                pocetnoSlovo: fixedTerm.slice(0,1),
                 pojam:fixedTerm,
                 vreme:firebase.firestore.Timestamp.fromDate(date)
             })
-            alertBox(alertModal, alertMsg, 'Term added to DB!!!')
+            alertBox(alertModal, alertMsg, alertTitle, 'Term added to DB!!!', 'Congrats!!!')
         }
-      })
-      .catch((error) => {
+    })
+    .catch((error) => {
         console.log("Error getting document: ", error);
-      });
-      console.log('aaa')
-      inputText.value = ''
-      inputCategory.value = ''
-})
+    });
+    console.log('aaa')
+    inputText.value = ''
+    inputCategory.value = ''
+    })
+
+    // BAZA
+    db.collection("pojmovi").doc("Mttx3td52jElTszZ7eio").delete().then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
+    
+    
+    db.collection('pojmovi').get()
+    .then(data=>{
+        data.docs.forEach(doc=>{
+            console.log(doc.id, " => ", doc.data());
+            // console.log(doc.data())
+        })
+    })
