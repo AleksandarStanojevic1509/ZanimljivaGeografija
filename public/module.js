@@ -45,3 +45,12 @@ export const checkUser = (modalForm, inputValue, modal) =>{
         modal.style.display = 'none';
     }
 }
+
+export const checkFirstLetter = (fixedTerm) =>{
+    if(fixedTerm.slice(0,2) === 'Nj' || fixedTerm.slice(0,2) === 'Lj' || fixedTerm.slice(0,2) === 'Dž'){
+        return fixedTerm.slice(0,2);
+    }
+    else {
+        return fixedTerm.slice(0,1);
+    }
+}

@@ -1,4 +1,4 @@
-import {showModal, fixInputValue, checkUser, alertBox, hallBox} from "./module.js"
+import {showModal, fixInputValue, checkUser, alertBox, hallBox, checkFirstLetter} from "./module.js"
 
 const modal = document.getElementById ('modal-bck');
 const modalForm = document.querySelector('#log-in form');
@@ -47,10 +47,14 @@ hOfBtnOneHandler.addEventListener('click', ()=>{
 mainFormHandler.addEventListener('click', (event)=>{
     event.preventDefault();
     const fixedTerm = fixInputValue (inputText); 
-    const category = inputCategory.value;  
+    const category = inputCategory.value;
     console.log(fixedTerm, category);
     
     if (fixedTerm === '' && category === '') return
+
+    let firstLetter = checkFirstLetter(fixedTerm)
+
+ 
 
     db.collection("pojmovi")
     .where("pojam", "==", `${fixedTerm}`)
@@ -66,7 +70,7 @@ mainFormHandler.addEventListener('click', (event)=>{
             db.collection('pojmovi').doc().set({
                 kategorija: category,
                 korisnik: localStorage.getItem('username'),
-                pocetnoSlovo: fixedTerm.slice(0,1),
+                pocetnoSlovo: firstLetter,
                 pojam:fixedTerm,
                 vreme:firebase.firestore.Timestamp.fromDate(date)
             })
@@ -82,17 +86,37 @@ mainFormHandler.addEventListener('click', (event)=>{
     })
 
     // BAZA
-    db.collection("pojmovi").doc("Mttx3td52jElTszZ7eio").delete().then(function() {
-        console.log("Document successfully deleted!");
-    }).catch(function(error) {
-        console.error("Error removing document: ", error);
-    });
+    // db.collection("pojmovi").doc("Mttx3td52jElTszZ7eio").delete().then(function() {
+    //     console.log("Document successfully deleted!");
+    // }).catch(function(error) {
+    //     console.error("Error removing document: ", error);
+    // });
     
-    
+    let niz = []
     db.collection('pojmovi').get()
     .then(data=>{
         data.docs.forEach(doc=>{
+            niz.push(doc.data())
             console.log(doc.id, " => ", doc.data());
             // console.log(doc.data())
         })
+        console.log (niz)
     })
+    
+    // HALL oF
+
+//     db.collection("pojmovi")
+// // .orderBy("currencyType")
+// .onSnapshot(snapshop => {
+//     // console.log('this is snap:' + snapshop.docChanges())
+//   let chages = snapshop.docChanges();
+//   chages.forEach(change => {
+//     console.log(change.doc.data())
+//     // if (change.type == "added") {
+//     //     banknoteListRender(change.doc);
+//     //   } else if (change.type == "removed") {
+//     //     let li = banknoteList.querySelector(`[data-id=${change.doc.id}]`);
+//     //     banknoteList.removeChild(li);
+//     //   }
+//     });
+//   });
