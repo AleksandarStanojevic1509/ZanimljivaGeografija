@@ -132,19 +132,7 @@ input[type="submit"]:hover {
   padding: 1rem 0;
 }
 
-#close{
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-top: -1rem;
-  margin-right: 0.3rem;
-  font-size: 3rem;
-  transform: rotateZ(45deg);
-  color: #26a69a;
-}
-#close:hover{
-  cursor: pointer;
-}
+
 button{
   width: 30%;
   margin: auto;
@@ -177,10 +165,10 @@ button{
   position: absolute;
   background-color: rgb(255, 255, 255) !important;
   width: 28rem;
-  height: 24rem;
+  height: 27rem;
   margin: 0 auto;
   z-index: 10;
-  margin-top: 8.5rem;
+  margin-top: 9.5rem;
   display: grid; /*grid*/
   grid-template-rows: 1fr 5fr 1fr;
   -webkit-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
@@ -195,45 +183,62 @@ button{
   border-bottom: 2px solid #47cec0 ;
 }
 th, td{
-  padding: 0.3rem !important;
+  padding: 0.5rem !important;
 }
 
-/* HEADER */
-header{
-  width: 100%;
-  text-align: center;
-  background-color: #47cec0 ;
-  display: grid !important;
-  height: 12vh;
-  grid-template-columns: 1fr 5fr 1fr;
+/* nav */
+nav{
+  background-color:  #26a69a !important ;
 }
-header div{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.mobile-ul{
+  width: 200px !important;
+  padding-top: 2rem;
 }
-#switch-box{
-  flex-direction: column;
+.mobile-ul a{
+  color:  #26a69a !important ;
+
 }
-header div span{
+nav>div{
+  margin: 0 5%;
+}
+.list-elements{
+  border-right: 1px solid rgba(255, 255, 255, 0.493);
+}
+.is-user {
+  padding: 0 15px;
+}
+.is-user span{
   font-weight: 800;
 }
-h1{
-  margin: 0 !important;
-  padding: 1rem 0;
+.mobile-list-elem{
+  display: flex;
+    justify-content: center;
+    align-items: center;
 }
-header i{
-  font-size: 4rem !important;
+#logo {
+  display: flex;
+  align-items: center;
 }
-header i:hover{
-  font-size: 4rem;
+
+.sync:hover{
   cursor: pointer;
   animation: rotateIn 1.5s ease-out 0s alternate infinite none running;
-  
 }
+.cloud-upload:hover{
+  animation: fadeOutUp 1.5s ease-out 0s alternate  infinite  none running;
+}
+.play-game-single:hover, .play-game-multi:hover {
+  animation: flip 1.5s ease-out 0s alternate  infinite  none running;
+
+}
+
+
 /* MAIN */
 #main-form{  
+  animation: bounceInDown;
+  animation-duration: 1s;
   margin: 2rem auto ;
+  position: relative;
   padding: 0 2rem;
   background-color: rgb(255, 255, 255) !important;
   width: 28rem;
@@ -241,7 +246,7 @@ header i:hover{
   -webkit-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
   -moz-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
   box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
-  display: grid;
+  display: none;
   grid-template-rows: 2fr 2fr 1fr;
 }
 
@@ -257,21 +262,36 @@ header i:hover{
 option{
   text-transform: capitalize;
 }
-/* FOOTER */
-footer{
+#close{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -1rem;
+  margin-right: 0.5rem;
+  font-size: 3rem;
+  transform: rotateZ(45deg);
+  color: #26a69a;
+}
+#close:hover{
+  cursor: pointer;
+}
+
+/* hall of fame */
+#hall-of-fame-box{
   width: 100%;
   display: flex; 
   justify-content: space-around;
 }
-footer div{
+#hall-of-fame-box div{
   width: 28rem; 
   display: grid; 
   grid-template-columns: 1fr 1fr; 
   gap: 1rem;
-  margin: auto;
+  margin: 2rem auto 0;
 }
 .HoF{
   width: 100%;
+  /* box-shadow: none !important; */
 }
 
 /* kayframes */

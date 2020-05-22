@@ -19,12 +19,16 @@ export const showModal = (modalForm, inputValue, modal)=>{
     })    
 }
 export const checkUser = (modalForm, inputValue, modal) =>{
-    const userBox = document.querySelector('header>div')
-    if(localStorage.getItem('username') === null) {
-        showModal(modalForm, inputValue, modal);
-    }
-    else if (localStorage.getItem('username') !== null){
-        userBox.innerHTML = `Hi,&nbsp <span> ${localStorage.getItem('username')}</span>`
-        modal.style.display = 'none';
-    }
+    const userBox = document.querySelectorAll('.is-user')
+    userBox.forEach(elem =>{
+
+        if(localStorage.getItem('username') === null) {
+            showModal(modalForm, inputValue, modal);
+        }
+        else if (localStorage.getItem('username') !== null){
+            elem.innerHTML = `Hi,&nbsp <span> ${localStorage.getItem('username')}</span>`
+            modal.style.display = 'none';
+        }
+    })
+        
 }

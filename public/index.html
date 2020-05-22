@@ -59,25 +59,43 @@
         </div>
     </div>
     
-    <!-- HEAER -->
-    <header>
+    <!-- HEADER -->
+
+  <div>
+    <nav>
+        <div class="nav-wrapper">
+          <a href="#!" id="logo" class="brand-logo"><span>geo</span><span style="margin: 6px 0 0 0; font-size: 35px;" class="material-icons sync">public</span><span>graphyGame</span></a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li class="list-elements"><a class="play-game-multi" href="sass.html"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">account_box</i></a></li>
+            <li class="list-elements"><a class="play-game-single" href="sass.html"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">desktop_windows</i></a></li>
+            <li class="list-elements"><a><i class="material-icons cloud-upload" style="margin: auto;">cloud_upload</i></a></li>
+            <li class="list-elements"><a><i class="material-icons sync" style="margin: auto;">sync</i></a></li>
+            <li><div class="is-user"><p>Hi, Anonymus</p></div></li>
+          </ul>
+        </div>
+      </nav>
+    
+      <ul class="sidenav mobile-ul" id="mobile-demo">
+        <li><a href="sass.html"><div class="mobile-list-elem play-game-multi"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">account_box</i></div></a></li>
+        <li><a href="sass.html"><div class="mobile-list-elem play-game-single"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">desktop_windows</i></div></a></li>        
+        <li><a style="display: flex;"><i class="material-icons cloud-upload" style="margin: auto; color: #26a69a !important ;;">cloud_upload</i></a></li>
+        <li><a style="display: flex;"><i class="material-icons sync" style="margin: auto; color: #26a69a !important ;;">sync</i></a></li>
+        <li style="text-align: center;"><a><div class="is-user" ></div></a></li>
+      </ul>
+  </div>
+            
+  
+    <div id="hall-of-fame-box">
         <div>
-            <p>Hi, Anonymus</p>
+            <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-terms">Hall Of Fame (terms)</button>
+            <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-score">Hall Of Fame (score)</button>
         </div>
-        <div>
-            <h1>Geography game</h1>
-        </div>
-        <div id="switch-box">
-            <i class="material-icons">sync</i>
-            <p>Switch user</p>
-        </div>
-        
-        
-    </header>
-    <div>
-        
     </div>
+
+
     <form id="main-form">
+        <div id="close"><p>+</p></div>
         <div class="input-field col s6">
             <input id="add-new-term" type="text" class="validate">
             <label for="add-new-term">Enter term...</label>
@@ -99,17 +117,26 @@
         <!-- <input id='submit' type="submit" value="Add to DB"> -->
     </form>
 
-    <footer>
-        <div>
-            <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-first">Hall Of Fame</button>
-            <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-second">Hall Of Fame</button>
-        </div>
-    </footer>
     
     
     
     
-    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let elems = document.querySelectorAll('.sidenav');
+        let instances = M.Sidenav.init(elems, {
+        edge: 'left',
+        draggable: true,
+        inDuration: 250,
+        outDuration: 200,
+        onOpenStart: null,
+        onOpenEnd: null,
+        onCloseStart: null,
+        onCloseEnd: null,
+        preventScrolling: true
+    });
+  });
+    </script>
     
     <script src="app.js" type="module"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js" ></script>
