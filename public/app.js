@@ -108,10 +108,18 @@ mainFormHandler.addEventListener('click', (event)=>{
     })
     
 
-    // BAZA
-    db.collection("pojmovi").doc("jmXVskYFIYNXRhifanHe").delete().then(function() {
-        console.log("Document successfully deleted!");
-    }).catch(function(error) {
-        console.error("Error removing document: ", error);
-    });
-    
+    // // BAZA
+    // db.collection("pojmovi").doc("jmXVskYFIYNXRhifanHe").delete().then(function() {
+    //     console.log("Document successfully deleted!");
+    // }).catch(function(error) {
+    //     console.error("Error removing document: ", error);
+    // });
+
+    // db.collection("pojmovi")
+    // .where("korisnik", "==", 'alexStan')
+    // .get()
+    // .then( snapshot => {
+    //     snapshot.docs.forEach( doc => {
+    //         db.collection('pojmovi').doc(doc.id).delete();
+    //     })
+    // });
