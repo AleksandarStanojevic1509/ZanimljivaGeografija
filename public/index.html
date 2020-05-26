@@ -34,7 +34,7 @@
             </form>
         </div>
     </div>
-
+    <!-- alert -->
     <div id='alert-modal-bck'>
         <div id="alert">
             <div>
@@ -47,45 +47,174 @@
             </div>
         </div>
     </div>
-
+    <!-- alert Winner -->
+    <div id='alert-winner-bck'>
+       
+    </div>
+    <!-- hall of fame -->
     <div id='hall-modal-bck'>
         <div id="hall">
             <h4>Hall Of Fame</h4>
             <div>
                 <table class="centered">
-                  </table>
+                </table>
             </div>
             <button class="btn" class="waves-effect waves-light btn-small">OK</button>
         </div>
     </div>
-    
+    <!-- game input -->
+    <div id="game-bck">
+        <div id="game-answers">
+            <div>
+                <h2 style="font-style: italic;" id="random-letter">E</h2>
+                <h2 id="time-to-end"></h2>
+            </div>
+            <form>
+                <div class="input-field col s6">
+                    <input id="user-drzava" type="text" class="validate">
+                    <label for="user-drzava">Država</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="user-grad" type="text" class="validate">
+                    <label for="user-grad">Grad</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="user-reka" type="text" class="validate">
+                    <label for="user-reka">Reka</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="user-planina" type="text" class="validate">
+                    <label for="user-planina">Planina</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="user-zivotinja" type="text" class="validate">
+                    <label for="user-zivotinja">Životinja</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="user-biljka" type="text" class="validate">
+                    <label for="user-biljka">Biljka</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="user-predmet" type="text" class="validate">
+                    <label for="user-predmet">Predmet</label>
+                </div>
+                <button class="btn" class="waves-effect waves-light btn-small">Submit</button>
+            </form>    
+        </div>
+    </div>
+    <!-- resultat -->
+
+    <div id="result-bck">
+        <div id="result">
+            <div id="close-res"><p>+</p></div>
+            <div><h3>Rezultat:</h3></div>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Kategorija</th>
+                            <th class="user-bck-td" id="res-user">User</th>
+                            <th class="user-bck-td">Poeni</th>
+                            <th class="bot-bck-td">Kompjuter</th>
+                            <th class="bot-bck-td">Poeni</th>
+                        </tr>
+                    </thead>
+            
+                    <tbody id="result-body">
+                        <tr>
+                            <td class="result-cat">Država</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Grad</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Reka</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                        <td class="result-cat">Planina</td>
+                        <td class="user-bck-td"></td>
+                        <td class="user-bck-td"></td>
+                        <td class="bot-bck-td"></td>
+                        <td class="bot-bck-td"></td>
+                      </tr>
+                      <tr>
+                        <td class="result-cat">Životinja</td>
+                        <td class="user-bck-td"></td>
+                        <td class="user-bck-td"></td>
+                        <td class="bot-bck-td"></td>
+                        <td class="bot-bck-td"></td>
+                      </tr>
+                      <tr>
+                        <td class="result-cat">Biljka</td>
+                        <td class="user-bck-td"></td>
+                        <td class="user-bck-td"></td>
+                        <td class="bot-bck-td"></td>
+                        <td class="bot-bck-td"></td>
+                      </tr>
+                      <tr>
+                        <td class="result-cat">Predmet</td>
+                        <td class="user-bck-td"></td>
+                        <td class="user-bck-td"></td>
+                        <td class="bot-bck-td"></td>
+                        <td class="bot-bck-td"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <div id="score">
+                <div>
+                </div>
+                <div>
+                </div>              
+            </div>
+
+            <div>
+                <button class="btn">Nova igra!</button>
+            </div>
+                    
+        </div>
+    </div>
+
+
     <!-- HEADER -->
 
-  <div>
-    <nav>
-        <div class="nav-wrapper">
-          <a href="#!" id="logo" class="brand-logo"><span>geo</span><span style="margin: 6px 0 0 0; font-size: 35px;" class="material-icons sync">public</span><span>graphyGame</span></a>
-          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-          <ul class="right hide-on-med-and-down">
-            <li class="list-elements"><a class="play-game-multi" href="sass.html"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">account_box</i></a></li>
-            <li class="list-elements"><a class="play-game-single" href="sass.html"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">desktop_windows</i></a></li>
-            <li class="list-elements"><a><i class="material-icons cloud-upload" style="margin: auto;">cloud_upload</i></a></li>
-            <li class="list-elements"><a><i class="material-icons sync" style="margin: auto;">sync</i></a></li>
-            <li><div class="is-user"><p>Hi, Anonymus</p></div></li>
-          </ul>
-        </div>
-      </nav>
-    
-      <ul class="sidenav mobile-ul" id="mobile-demo">
-        <li><a href="sass.html"><div class="mobile-list-elem play-game-multi"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">account_box</i></div></a></li>
-        <li><a href="sass.html"><div class="mobile-list-elem play-game-single"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">desktop_windows</i></div></a></li>        
-        <li><a style="display: flex;"><i class="material-icons cloud-upload" style="margin: auto; color: #26a69a !important ;;">cloud_upload</i></a></li>
-        <li><a style="display: flex;"><i class="material-icons sync" style="margin: auto; color: #26a69a !important ;;">sync</i></a></li>
-        <li style="text-align: center;"><a><div class="is-user" ></div></a></li>
-      </ul>
-  </div>
+    <div>
+        <nav>
+            <div class="nav-wrapper">
+                <a id="logo" class="brand-logo"><span>geo</span><span style="margin: 6px 0 0 0; font-size: 35px;" class="material-icons sync">public</span><span>graphyGame</span></a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                <li class="list-elements"><a class="play-game-multi"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">account_box</i></a></li>
+                <li class="list-elements"><a class="play-game-single"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">desktop_windows</i></a></li>
+                <li class="list-elements"><a><i class="material-icons cloud-upload" style="margin: auto;">cloud_upload</i></a></li>
+                <li class="list-elements"><a><i class="material-icons sync" style="margin: auto;">sync</i></a></li>
+                <li><div class="is-user"><p>Hi, Anonymus</p></div></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <ul class="sidenav mobile-ul" id="mobile-demo">
+            <li><a><div class="mobile-list-elem play-game-multi"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">account_box</i></div></a></li>
+            <li><a><div class="mobile-list-elem play-game-single"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">desktop_windows</i></div></a></li>        
+            <li><a style="display: flex;"><i class="material-icons cloud-upload" style="margin: auto; color: #26a69a !important ;;">cloud_upload</i></a></li>
+            <li><a style="display: flex;"><i class="material-icons sync" style="margin: auto; color: #26a69a !important ;;">sync</i></a></li>
+            <li style="text-align: center;"><a><div class="is-user" ></div></a></li>
+        </ul>
+    </div>
             
-  
+
     <div id="hall-of-fame-box">
         <div>
             <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-terms">Hall Of Fame (terms)</button>
@@ -93,8 +222,11 @@
         </div>
     </div>
 
+    <div id="gif-bck" >
+        <img src="img/globe.gif"  alt="">
+    </div>
 
-    <form id="main-form">
+    <form id="add-term-form">
         <div id="close"><p>+</p></div>
         <div class="input-field col s6">
             <input id="add-new-term" type="text" class="validate">
@@ -102,23 +234,22 @@
         </div>
 
         <div>
-            <input placeholder="Choose category..." list="category-opt" id="cat-opt">
-            <datalist id="category-opt">
-                <option>Država</option>
-                <option>Grad</option>
-                <option>Reka</option> 
-                <option>Planina</option> 
-                <option>Životinja</option> 
-                <option>Biljka</option> 
-                <option>Predmet</option> 
-            </datalist>
+            <div class="input-field col s12" style="width: 100%;">
+                <select name="" style="display: block;" id="cat-opt">
+                    <option disabled selected>Choose category...</option>
+                    <option>Država</option>
+                    <option>Grad</option>
+                    <option>Reka</option> 
+                    <option>Planina</option> 
+                    <option>Životinja</option> 
+                    <option>Biljka</option> 
+                    <option>Predmet</option> 
+                </select>
+            </div>
         </div>
         <button class="HoF waves-effect waves-light btn-small" id='submit'>Add to DB</button>
         <!-- <input id='submit' type="submit" value="Add to DB"> -->
     </form>
-
-    
-    
     
     
     <script>
@@ -134,16 +265,17 @@
         onCloseStart: null,
         onCloseEnd: null,
         preventScrolling: true
+        });
     });
-  });
     </script>
-    
     <script src="app.js" type="module"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js" ></script>
     <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js" ></script>
     <script>
         // Your web app's Firebase configuration
-        var firebaseConfig = {
+        
+   
+    var firebaseConfig = {
             apiKey: "AIzaSyCiYRBfXZSEImfV9uqwhqK_8oDP18WTMts",
             authDomain: "zgeografija-6db02.firebaseapp.com",
             databaseURL: "https://zgeografija-6db02.firebaseio.com",
@@ -152,7 +284,7 @@
             messagingSenderId: "378635864704",
             appId: "1:378635864704:web:a5df44ec282359260e3465",
             measurementId: "G-SW0L7YNFXL"
-    };
+        };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();

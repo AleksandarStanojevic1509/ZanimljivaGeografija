@@ -15,6 +15,7 @@ export const sortUsers = (arrayOfUsers) =>{
     return sorted.sort(function(a, b) {
         return a[1] - b[1];
     }).reverse();
+    //moze b[1] - a[1] i ne morea reverse()
 }
 
 export const renderTable = (sortedArray) =>{
@@ -25,7 +26,6 @@ export const renderTable = (sortedArray) =>{
                     <th>Terms</th>
                 </tr>
             </thead>
-
             <tbody>
                 <tr>
                 <td>1.</td>
@@ -52,7 +52,8 @@ export const renderTable = (sortedArray) =>{
                 <td>${sortedArray[4][0]}</td>
                 <td>${sortedArray[4][1]}</td>
                 </tr>
-            </tbody>
-    `
+                </tbody>
+                `
 }
+            
 
