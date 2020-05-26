@@ -55,5 +55,4 @@ export const renderTable = (sortedArray) =>{
                 </tbody>
                 `
 }
-            
 
