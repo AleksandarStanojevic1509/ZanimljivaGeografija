@@ -31,7 +31,7 @@ export const declareWinnerAlert = (alert, playerTotalPoints, botTotalPoints)=>{
 const alertWinner = (info, title) =>{
     return ` <div id="alert-winner">
     <div style="display: flex;justify-content: center;align-items: center;">
-        <img style="width:9rem"src="/public/img/globe.gif" alt="">    
+        <img style="width:9rem"src="img/globe.gif" alt="">    
     </div>
     <div style="display: flex; flex-direction: column; justify-content: space-around; align-items:center">
         <h3 style="margin: 0;">${title}</h3>
