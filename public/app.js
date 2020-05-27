@@ -23,15 +23,15 @@ const addTermHandler = document.getElementById('submit');
 const closeAddTermHandler = document.getElementById('close');
 const gifBox = document.getElementById('gif-bck');
 // playGame
+const alertWinnerModal = document.querySelector('#alert-winner-bck');
 const closeResultHandler = document.getElementById('close-res');
 const resultBackgound = document.getElementById('result-bck')
 const userAnswersBox = document.getElementById('game-bck');
 const singleGameSubmitBtn = document.querySelector('#game-answers button');
 const singleGameHandelr = document.querySelectorAll('.play-game-single');
-const multiGameHandelr = document.querySelectorAll('.play-game-multi');
+// const multiGameHandelr = document.querySelectorAll('.play-game-multi');
 const playerForm = document.querySelector('#game-answers form');
 const resetGame = document.querySelector('#result button')
-const alertWinnerModal = document.querySelector('#alert-winner-bck');
 
 
 let arrayOfUsers = [];
@@ -57,32 +57,32 @@ switchUserHandler.forEach(elem =>{
     })
 })
 
-
                                         // HALL OF FAME (TERMS)
 
 // trenutno onemoguceno !!!!!
 // hOfBtnOneHandler.addEventListener('click', ()=>{
-    //     hallBox(hOfBox);
-    //     // render hall of fame
-    //     db.collection('pojmovi').get()
-    //     .then(data=>{
-    //         data.docs.forEach(doc=>{
-    //             arrayOfUsers.push(doc.data().korisnik);
-    //             // console.log(doc.id, " => ", doc.data());
-    //         })
-    //         let sortedArray = sortUsers (arrayOfUsers);        
-    //         hOfTable.innerHTML = renderTable(sortedArray);        
-    //     })
-    // })
+//     hallBox(hOfBox);
+
+//     // render hall of fame
+//     db.collection('pojmovi').get()
+//     .then(data=>{
+//         data.docs.forEach(doc=>{
+//             arrayOfUsers.push(doc.data().korisnik);
+//             // console.log(doc.id, " => ", doc.data());
+//         })
+//         let sortedArray = sortUsers (arrayOfUsers);        
+//         hOfTable.innerHTML = renderTable(sortedArray);        
+//     })
+// })
 
 // close modal
 btnHall.addEventListener('click', ()=>{
-    hOfBox.style.display = 'none';    
+    hOfBox.style.display = 'none';
+    
 })
 
                                         // ADD NEW TERMS
 
-// open modal
 addTermToDBHandler.forEach(elem=>{
     elem.addEventListener('click', ()=>{
     gifBox.style.display = 'none';
@@ -135,6 +135,7 @@ addTermHandler.addEventListener('click', (event)=>{
     addTermForm.style.display = 'none';
 })
 
+
 // close add modal
 closeAddTermHandler.addEventListener('click', ()=>{
     addTermForm.style.display = 'none';
@@ -142,9 +143,9 @@ closeAddTermHandler.addEventListener('click', ()=>{
 
                                         // SINGLE GAME MODE
 
-let countDown = 91;
-
 // start with game
+let countDown = 61;
+
 singleGameHandelr.forEach(elem=>{
     elem.addEventListener('click', ()=>{
         userAnswersBox.style.display = 'grid';
@@ -154,45 +155,48 @@ singleGameHandelr.forEach(elem=>{
         localStorage.setItem('randomLetter', `${letter}`)
         document.getElementById('random-letter').innerHTML  = letter;  
 
-        // countDown Time         
+        // countDown Time 
+        
         gameTime = setInterval( () => {
-            //submit answers if time is ran out
             if(countDown === 0){
+                // submituj formu i proglasi pobednika
+
                 getWinner(playerForm)
                 resultBackgound.style.display = 'block'
                 // reset countDown Time 
                 clearInterval(gameTime);
-                countDown = 91;
+                countDown = 61;
                 resetData(userAnswersBox, playerForm);
             }
-        // coundDown and udate UI
-        else {
-            countDown--;
-            let createTime = new Date (countDown * 1000);
-            let sec = createTime.getMinutes()*60 + createTime.getSeconds() ;  
-            if(sec < 10){
-                document.getElementById('time-to-end').innerHTML = `<span style="color:red">${sec}<span>`;
+            else {
+                countDown--;
+                let createTime = new Date (countDown * 1000);
+                let sec = createTime.getMinutes()*60 + createTime.getSeconds() ;  
+                if(sec < 10){
+                    document.getElementById('time-to-end').innerHTML = `<span style="color:red">${sec}<span>`;
+                }
+                else{
+                    document.getElementById('time-to-end').innerHTML = `<span style="color:black">${sec}<span>`;
+                }
             }
-            else{
-                document.getElementById('time-to-end').innerHTML = `<span style="color:black">${sec}<span>`;
-            }
-        }
-    }, 1000);
-})    
+        }, 1000);
+    })    
 })
 
 //submit answers
 singleGameSubmitBtn.addEventListener('click', (event)=>{
-    event.preventDefault();
+    event.preventDefault();   
 
-    getWinner(playerForm)
+    getWinner (playerForm)
     resultBackgound.style.display = 'block'
     // reset countDown Time 
     resetData(userAnswersBox, playerForm);
     clearInterval(gameTime);
-    countDown = 91;    
+    countDown = 61; 
 })
-
+    
+    
+    
 // close result box
 closeResultHandler.addEventListener('click', ()=>{
     resultBackgound.style.display = 'none';
@@ -204,6 +208,7 @@ alertWinnerModal.addEventListener('click', event => {
     if (event.target.tagName === 'BUTTON'){
         alertWinnerModal.style.display = 'none'
     }
+
 })
 
 // reset game
@@ -216,8 +221,7 @@ resetGame.addEventListener('click', ()=>{
     localStorage.setItem('randomLetter', `${letter}`)
     document.getElementById('random-letter').innerHTML  = letter;  
 
-    // countDown Time 
-    
+    // countDown Time     
     gameTime = setInterval( () => {
         if(countDown === 0){
             // submituj formu i proglasi pobednika
@@ -226,7 +230,7 @@ resetGame.addEventListener('click', ()=>{
             resultBackgound.style.display = 'block'
             // reset countDown Time 
             clearInterval(gameTime);
-            countDown = 91;
+            countDown = 61;
             resetData(userAnswersBox, playerForm);
         }
     else {
@@ -244,31 +248,31 @@ resetGame.addEventListener('click', ()=>{
 })   
 
 
+
 // BAZA
-// db.collection("pojmovi").doc("2XDElWysqCuBQsGKHZI3").delete()
-// .then(function() {
-//     console.log("Document successfully deleted!");
-// })
-// .catch(function(error) {
-//     console.error("Error removing document: ", error);
-// });
+// db.collection("pojmovi").doc("2XDElWysqCuBQsGKHZI3").delete().then(function() {
+    //     console.log("Document successfully deleted!");
+    // }).catch(function(error) {
+        //     console.error("Error removing document: ", error);
+        // });
         
-// KVARNICKI 
+    //  KVARNICKI 
     
-//     let wordArray = [];
-//     let words = 'Belislez Žalfija Kamilica Nana Majčinadušica Brusnica Godži Aronija Borovnica Jagoda Avokado Ananas Višnja Trešnja Šljiva Kajsija Breskva Narandža Pomorandža Mandarina Banana Mango Grožđe Grejpfrut Grejp Kajsija Kivi Kruška Limeta Lubenica Dinja Pomelo Kokos Peršun Perunika Grašak Krastavac Šargarepa Cvekla Tikvica Paradajz Plaviparadajz Boranija Pasulj Paprika Batat Krompir Beliluk Crniluk Praziluk Luk Blitva Celer Lan Grašak Cvekla Đumbir Rukola Brokoli Karfilol Sremuš Zelenasalata Neven Kukuruz Kupus Kelj Prokelj Bob Bokvica Orah Brazilskiorah Indijskiorah Lešnik Badem Maka Čia Suncokret Soja Kikiriki Maslina Susam Konoplja Pšenica Ječam Detelina Proso Pirinač Kinoa Kukuruz Raž Sočivo Heljda Jasmin Ovas Bundeva Slačica Kakao Kafa Biber Kurkuma Kumin Kim Kari Cimet Vanila Đumbir Dren Drenjina Glog Breza Vrba Šipak Ginko Ginkobiloba Ehinacea Ženšen Čuvarkuća Kaktus Guava Urma Datula Dud Bagrem Dunja Jojoba Kupina Kesten Lešnik Mušmula Papaja Pistaći Rogač Ribizla';
+//         let wordArray = [];
+//     let words = 'Antilopa Ajkula Ara Albatros Bizon Bivo Babun Boa Cvrčak Cipal Carić Čikov Činčila Čavka Čaplja Ćurka Ćuk Deverika Detlić Drozd Dabar Džeksonovkameleon Džofrijevocelot Đavoljaraža Đavoljizubošaranaš Emu Eja Flamingo Fugu Fratar Foka Galeb Gavran Grgeč Grdoba Haringa Harpija Hrčak Hijena Irvas Ibis Iverak Jazavac Jegulja Jež Jesetra Klen Karaš Kolibri Kuna Lav Lemur Lasta Losos Ljiljak Medved Muflon Makaki Moruna Noj Nosorog Nutrija Njorka Oslić Orao Okapi Puma Panda Pauk Prepelica Rak Roda Raža Ris Som Smuđ Sova Soko Ševa Šljuka Šaran Šakal Tigar Tvor Tuna Tetreb Uholaže Ulješara Utva Veverica Valabi Varan Vaška Zebra Zeba Zec Ždral Žaba Žderavac';
 //     wordArray = words.split(' ');
 //     console.log(wordArray)
 //     wordArray.forEach(word => {
 //         const date = new Date();
 //                db.collection('pojmovi').doc().set({
-//                    kategorija: 'Biljka',
+//                    kategorija: 'Životinja',
 //                    korisnik: localStorage.getItem('username'),
 //                    pocetnoSlovo: word.slice(0,1).toUpperCase(),
 //                    pojam:word,
 //                    vreme:firebase.firestore.Timestamp.fromDate(date)
 //                })
-// })
+       
+//    })
 
 // BRISANJE SVIH PODATAKA JEDNOG USERA
 // db.collection("pojmovi")
