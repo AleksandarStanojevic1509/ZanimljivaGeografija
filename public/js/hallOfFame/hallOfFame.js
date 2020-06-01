@@ -32,28 +32,28 @@ export const renderTable = (sortedArray) =>{
                 <td>${sortedArray[0][0]}</td>
                 <td>${sortedArray[0][1]}</td>
                 </tr>
+                <tr>
+                <td>2.</td>
+                <td>${sortedArray[1][0]}</td>
+                <td>${sortedArray[1][1]}</td>
+                </tr>
+                <tr>
+                <td>3.</td>
+                <td>${sortedArray[2][0]}</td>
+                <td>${sortedArray[2][1]}</td>
+                </tr>
+                <tr>
+                <td>4.</td>
+                <td>${sortedArray[3][0]}</td>
+                <td>${sortedArray[3][1]}</td>
+                </tr>
+                <tr>
+                <td>5.</td>
+                <td>${sortedArray[4][0]}</td>
+                <td>${sortedArray[4][1]}</td>
+                </tr>
                 </tbody>
                 `
 }
             
 
-                // <tr>
-                // <td>2.</td>
-                // <td>${sortedArray[1][0]}</td>
-                // <td>${sortedArray[1][1]}</td>
-                // </tr>
-                // <tr>
-                // <td>3.</td>
-                // <td>${sortedArray[2][0]}</td>
-                // <td>${sortedArray[2][1]}</td>
-                // </tr>
-                // <tr>
-                // <td>4.</td>
-                // <td>${sortedArray[3][0]}</td>
-                // <td>${sortedArray[3][1]}</td>
-                // </tr>
-                // <tr>
-                // <td>5.</td>
-                // <td>${sortedArray[4][0]}</td>
-                // <td>${sortedArray[4][1]}</td>
-                // </tr>

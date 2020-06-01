@@ -261,6 +261,7 @@ nav>div{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #26a69a;
 }
 #game-answers>div h2{
   margin: 0;
@@ -328,6 +329,9 @@ width: 100%;
   color: rgb(109, 109, 109);
 }
 #result td{
+  text-align: center;
+}
+#result th{
   text-align: center;
 }
 #score{

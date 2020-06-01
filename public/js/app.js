@@ -1,7 +1,9 @@
-import {fixInputValue, alertBox, checkFirstLetter, pickRandomLetter, resetData} from "./general.js"
-import {hallBox, sortUsers, renderTable} from "./hallOfFame.js"
-import {showModal, checkUser} from "./user.js"
-import {getWinner} from "./singleGame.js"
+import {fixInputValue, alertBox, checkFirstLetter} from "./general/general.js"
+import {hallBox, sortUsers, renderTable} from "./hallOfFame/hallOfFame.js"
+import {showModal, checkUser} from "./general/user.js"
+import {getWinner} from "./game/singleGame.js"
+import {pickRandomLetter, resetData} from './game/game.js'
+import {addTerm} from "./general/addTerm.js"
 
 const modal = document.getElementById ('modal-bck');
 const modalForm = document.querySelector('#log-in form');
@@ -32,6 +34,7 @@ const singleGameHandelr = document.querySelectorAll('.play-game-single');
 // const multiGameHandelr = document.querySelectorAll('.play-game-multi');
 const playerForm = document.querySelector('#game-answers form');
 const resetGame = document.querySelector('#result button')
+
 
 
 let arrayOfUsers = [];
@@ -75,11 +78,11 @@ switchUserHandler.forEach(elem =>{
 //     })
 // })
 
-// close modal
-btnHall.addEventListener('click', ()=>{
-    hOfBox.style.display = 'none';
-    
-})
+// // close modal
+// btnHall.addEventListener('click', ()=>{
+//     hOfBox.style.display = 'none';
+//     arrayOfUsers = []    
+// })
 
                                         // ADD NEW TERMS
 
@@ -93,6 +96,7 @@ addTermToDBHandler.forEach(elem=>{
 // adding new term to db
 addTermHandler.addEventListener('click', (event)=>{
     event.preventDefault();
+    
     const fixedTerm = fixInputValue (inputText); 
     const category = inputCategory.value;
     
@@ -103,34 +107,11 @@ addTermHandler.addEventListener('click', (event)=>{
         addTermForm.reset();
         return;
     }
-    let firstLetter = checkFirstLetter(fixedTerm);
+
+    const firstLetter = checkFirstLetter(fixedTerm);   
     
-    db.collection("pojmovi")
-    .where("pojam", "==", `${fixedTerm}`)
-    .where("kategorija", "==", `${inputCategory.value}`)
-    .where("pocetnoSlovo","==", `${firstLetter}`)
-    .get()
-    .then((querySnapshot) => {
-        if (querySnapshot.size > 0) {
-            querySnapshot.docs.forEach((doc) => {
-            alertBox(alertModal, alertMsg, alertTitle, 'The term already exists!!!', 'Oops...');
-        }) 
-    }
-    else {
-            const date = new Date();
-            db.collection('pojmovi').doc().set({
-                kategorija: category,
-                korisnik: localStorage.getItem('username'),
-                pocetnoSlovo: firstLetter,
-                pojam:fixedTerm,
-                vreme:firebase.firestore.Timestamp.fromDate(date)
-            })
-            alertBox(alertModal, alertMsg, alertTitle, 'The term added to DB!!!', 'Congrats!!!');
-        }
-    })
-    .catch((error) => {
-        alertBox(alertModal, alertMsg, alertTitle, 'Sorry, we have too many requests, please try later!', 'Oops!!!');
-    });
+    addTerm(fixedTerm, firstLetter, category, inputCategory, alertModal, alertMsg, alertTitle);
+    
     addTermForm.reset();
     addTermForm.style.display = 'none';
 })
@@ -152,6 +133,7 @@ singleGameHandelr.forEach(elem=>{
 
         // pick random letter
         let letter = pickRandomLetter();
+        // let letter = 'Nj';
         localStorage.setItem('randomLetter', `${letter}`)
         document.getElementById('random-letter').innerHTML  = letter;  
 
@@ -246,43 +228,4 @@ resetGame.addEventListener('click', ()=>{
     }
 }, 1000);
 })   
-
-
-
-// BAZA
-// db.collection("pojmovi").doc("2XDElWysqCuBQsGKHZI3").delete().then(function() {
-    //     console.log("Document successfully deleted!");
-    // }).catch(function(error) {
-        //     console.error("Error removing document: ", error);
-        // });
-        
-    //  KVARNICKI 
-    
-//         let wordArray = [];
-//     let words = 'Antilopa Ajkula Ara Albatros Bizon Bivo Babun Boa Cvrčak Cipal Carić Čikov Činčila Čavka Čaplja Ćurka Ćuk Deverika Detlić Drozd Dabar Džeksonovkameleon Džofrijevocelot Đavoljaraža Đavoljizubošaranaš Emu Eja Flamingo Fugu Fratar Foka Galeb Gavran Grgeč Grdoba Haringa Harpija Hrčak Hijena Irvas Ibis Iverak Jazavac Jegulja Jež Jesetra Klen Karaš Kolibri Kuna Lav Lemur Lasta Losos Ljiljak Medved Muflon Makaki Moruna Noj Nosorog Nutrija Njorka Oslić Orao Okapi Puma Panda Pauk Prepelica Rak Roda Raža Ris Som Smuđ Sova Soko Ševa Šljuka Šaran Šakal Tigar Tvor Tuna Tetreb Uholaže Ulješara Utva Veverica Valabi Varan Vaška Zebra Zeba Zec Ždral Žaba Žderavac';
-//     wordArray = words.split(' ');
-//     console.log(wordArray)
-//     wordArray.forEach(word => {
-//         const date = new Date();
-//                db.collection('pojmovi').doc().set({
-//                    kategorija: 'Životinja',
-//                    korisnik: localStorage.getItem('username'),
-//                    pocetnoSlovo: word.slice(0,1).toUpperCase(),
-//                    pojam:word,
-//                    vreme:firebase.firestore.Timestamp.fromDate(date)
-//                })
-       
-//    })
-
-// BRISANJE SVIH PODATAKA JEDNOG USERA
-// db.collection("pojmovi")
-//     .where("korisnik", "==", 'alexStan')
-//     .get()
-//     .then( snapshot => {
-//         snapshot.docs.forEach( doc => {
-//             db.collection('pojmovi').doc(doc.id).delete();
-//         })
-//     });
-
-
 
