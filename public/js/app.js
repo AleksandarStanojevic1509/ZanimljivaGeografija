@@ -2,7 +2,7 @@ import {fixInputValue, alertBox, checkFirstLetter} from "./general/general.js"
 import {hallBox, sortUsers, renderTable} from "./hallOfFame/hallOfFame.js"
 import {showModal, checkUser} from "./general/user.js"
 import {getWinner} from "./game/singleGame.js"
-import {pickRandomLetter, resetData} from './game/game.js'
+import {pickRandomLetter, resetData, resetScoreTable, declareWinnerAlert} from './game/game.js'
 import {addTerm} from "./general/addTerm.js"
 
 const modal = document.getElementById ('modal-bck');
@@ -24,16 +24,22 @@ const addTermForm = document.getElementById('add-term-form');
 const addTermHandler = document.getElementById('submit');
 const closeAddTermHandler = document.getElementById('close');
 const gifBox = document.getElementById('gif-bck');
-// playGame
+// singleGame
 const alertWinnerModal = document.querySelector('#alert-winner-bck');
 const closeResultHandler = document.getElementById('close-res');
 const resultBackgound = document.getElementById('result-bck')
 const userAnswersBox = document.getElementById('game-bck');
 const singleGameSubmitBtn = document.querySelector('#game-answers button');
 const singleGameHandelr = document.querySelectorAll('.play-game-single');
-// const multiGameHandelr = document.querySelectorAll('.play-game-multi');
 const playerForm = document.querySelector('#game-answers form');
 const resetGame = document.querySelector('#result button')
+const finalScore = document.getElementById('score')
+const resultTable = document.querySelector('#result-body')
+
+// multiGame
+
+const multiGameHandelr = document.querySelectorAll('.play-game-multi');
+const multiGameInputBox = document.getElementById('game-multi-bck')
 
 
 
@@ -137,31 +143,8 @@ singleGameHandelr.forEach(elem=>{
         localStorage.setItem('randomLetter', `${letter}`)
         document.getElementById('random-letter').innerHTML  = letter;  
 
-        // countDown Time 
-        
-        gameTime = setInterval( () => {
-            if(countDown === 0){
-                // submituj formu i proglasi pobednika
-
-                getWinner(playerForm)
-                resultBackgound.style.display = 'block'
-                // reset countDown Time 
-                clearInterval(gameTime);
-                countDown = 61;
-                resetData(userAnswersBox, playerForm);
-            }
-            else {
-                countDown--;
-                let createTime = new Date (countDown * 1000);
-                let sec = createTime.getMinutes()*60 + createTime.getSeconds() ;  
-                if(sec < 10){
-                    document.getElementById('time-to-end').innerHTML = `<span style="color:red">${sec}<span>`;
-                }
-                else{
-                    document.getElementById('time-to-end').innerHTML = `<span style="color:black">${sec}<span>`;
-                }
-            }
-        }, 1000);
+        // countDown Time
+        timer()
     })    
 })
 
@@ -171,7 +154,9 @@ singleGameSubmitBtn.addEventListener('click', (event)=>{
 
     getWinner (playerForm)
     resultBackgound.style.display = 'block'
+   
     // reset countDown Time 
+
     resetData(userAnswersBox, playerForm);
     clearInterval(gameTime);
     countDown = 61; 
@@ -196,14 +181,42 @@ alertWinnerModal.addEventListener('click', event => {
 // reset game
 resetGame.addEventListener('click', ()=>{
     resultBackgound.style.display = 'none'
+    // resetScoreTable(resultTable)
+    // finalScore.children[0].innerHTML = `<p>${localStorage.username}: <span>0</span></p>`;
+    // finalScore.children[1].innerHTML = `<p>Kompjuter: <span>0</span></p>`;
 
     userAnswersBox.style.display = 'grid';
     // pick random letter
     let letter = pickRandomLetter();
     localStorage.setItem('randomLetter', `${letter}`)
     document.getElementById('random-letter').innerHTML  = letter;  
+    // countDown Time     
+    timer()
+})   
+
+
+
+                                        // MULTI GAME MODE
+
+
+multiGameHandelr.forEach(elem=>{
+    elem.addEventListener('click', ()=>{
+    multiGameInputBox.style.display = 'grid'
+    // pick random letter
+    let letter = pickRandomLetter();
+    localStorage.setItem('randomLetterMulti', `${letter}`)
+    document.getElementById('random-letter-multi').innerHTML  = letter;  
 
     // countDown Time     
+    timer()
+
+    })
+})
+
+
+// Timer
+
+function timer () {
     gameTime = setInterval( () => {
         if(countDown === 0){
             // submituj formu i proglasi pobednika
@@ -220,12 +233,16 @@ resetGame.addEventListener('click', ()=>{
         let createTime = new Date (countDown * 1000);
         let sec = createTime.getMinutes()*60 + createTime.getSeconds() ;  
         if(sec < 10){
-            document.getElementById('time-to-end').innerHTML = `<span style="color:red">${sec}<span>`;
+            document.querySelectorAll('.time-to-end').forEach(elem=>{
+                elem.innerHTML = `<span style="color:red">${sec}<span>`;
+            })
         }
         else{
-            document.getElementById('time-to-end').innerHTML = `<span style="color:black">${sec}<span>`;
+            document.querySelectorAll('.time-to-end').forEach(elem=>{
+                elem.innerHTML = `<span style="color:black">${sec}<span>`;
+            })
         }
     }
 }, 1000);
-})   
+}
 

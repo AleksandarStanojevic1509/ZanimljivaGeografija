@@ -60,11 +60,11 @@ export const FirstLetter = (fixedTerm) =>{
 
 
 // BRISANJE SVIH PODATAKA JEDNOG USERA
-db.collection("pojmovi")
-    .where("korisnik", "==", 'alexStan')
-    .get()
-    .then( snapshot => {
-        snapshot.docs.forEach( doc => {
-            db.collection('pojmovi').doc(doc.id).delete();
-        })
-    });
+// db.collection("pojmovi")
+//     .where("korisnik", "==", 'alexStan')
+//     .get()
+//     .then( snapshot => {
+//         snapshot.docs.forEach( doc => {
+//             db.collection('pojmovi').doc(doc.id).delete();
+//         })
+//     });

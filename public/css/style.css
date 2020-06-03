@@ -270,7 +270,7 @@ nav>div{
 #random-letter{
   text-align: center;
 }
-#time-to-end{
+.time-to-end{
   text-align: right;
 }
 #game-answers input {
@@ -280,6 +280,96 @@ nav>div{
 #game-answers button{
 width: 100%;
 }
+
+
+/* multi game */
+
+#game-multi-bck {
+  background-color:  #cccccc8c;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 5;
+}
+
+#game-multi-answers{
+  animation: bounceInDown;
+  animation-duration: 1s;
+  margin: 5rem auto 0 ;
+  left: 0;
+  right: 0;  
+  position: absolute;
+  padding: 0.5rem 2rem;
+  background-color: rgb(255, 255, 255) !important;
+  width: 40rem;
+  height: 37rem;
+  -webkit-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  -moz-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  display: grid;
+  grid-template-rows: 1fr 6fr;
+  z-index: 99;
+}
+/* #user-answers form{
+  display: grid;
+  grid-template-rows: 8fr;
+} */
+#game-multi-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #26a69a;
+}
+#game-multi-header h2{
+  margin: 0;
+}
+#random-letter{
+  text-align: center;
+}
+#time-to-end{
+  text-align: right;
+}
+#input-chat-wraper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+}
+#game-multi-answers input {
+  margin: 0 !important;
+  height: 2.7rem !important; 
+}
+#game-multi-answers button{
+width: 100%;
+}
+#game-multi-chat{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+#display-chat{
+  height: 10rem;
+  width: 100%;
+  background-color:#47cec14f;
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.33);
+-moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.33);
+box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.33);
+}
+#game-multi-chat div{
+  /* width: 100px; 
+  height: 200px; 
+  background-color: blueviolet; */
+}
+#game-multi-answers form{
+  display: contents;
+}
+#game-multi-chat button{
+ display: flex;
+ justify-content: center;
+} 
 
 /* result */
 #result-bck {
@@ -427,8 +517,8 @@ option{
   }
   #user-answers, #result{
     width: 96%;
-
   }
+
   #logo{
     font-size: 1.5rem;
   }
