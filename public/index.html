@@ -121,7 +121,7 @@
     <div id="game-multi-bck">
         <div id="game-multi-answers">
             <div id="game-multi-header"> 
-                <h2 style="font-style: italic;" id="random-letter-multi">E</h2>
+                <h2 style="font-style: italic;" id="random-letter-multi"></h2>
                 <h2 class="time-to-end"></h2>
             </div>
             <div id="input-chat-wraper">
@@ -162,7 +162,7 @@
                     <h4>Chat</h4>
                     <div id="display-chat">
                         <ul>
-                            <li>AHAHAHA</li>
+                            
                         </ul>
                     </div>
                     <div id="ctrl-chat">
@@ -171,7 +171,7 @@
                                 <input id="multi-user-chat" type="text" class="validate">
                                 <label for="multi-user-chat">Type msg...</label>
                             </div>
-                            <button class="btn"><span class="material-icons centar">send</span></button>
+                            <button id="chat-btn" class="btn"><span class="material-icons centar">send</span></button>
                             <!-- <input type="submit" value="Send Msg"> -->
                         </form>            
                     </div>
@@ -355,7 +355,7 @@
 
 
 
-    
+    <script src="/socket.io/socket.io.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         let elems = document.querySelectorAll('.sidenav');

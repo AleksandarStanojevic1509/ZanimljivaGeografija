@@ -2,8 +2,10 @@ import {fixInputValue, alertBox, checkFirstLetter} from "./general/general.js"
 import {hallBox, sortUsers, renderTable} from "./hallOfFame/hallOfFame.js"
 import {showModal, checkUser} from "./general/user.js"
 import {getWinner} from "./game/singleGame.js"
-import {pickRandomLetter, resetData, resetScoreTable, declareWinnerAlert} from './game/game.js'
+import {pickRandomLetter, resetData, resetScoreTable, declareWinnerAlert, collectPlayerAnswers} from './game/game.js'
 import {addTerm} from "./general/addTerm.js"
+import {writeEvent} from './game/multiGame.js'
+// import {collectPlayerAnswers} from './game/game.js'
 
 const modal = document.getElementById ('modal-bck');
 const modalForm = document.querySelector('#log-in form');
@@ -38,8 +40,10 @@ const resultTable = document.querySelector('#result-body')
 
 // multiGame
 
-const multiGameHandelr = document.querySelectorAll('.play-game-multi');
+const multiGameHandler = document.querySelectorAll('.play-game-multi');
 const multiGameInputBox = document.getElementById('game-multi-bck')
+const chatHanler = document.querySelector('#ctrl-chat button')
+const multiAnswersForm = document.querySelector('#game-multi-input button')
 
 
 
@@ -199,20 +203,39 @@ resetGame.addEventListener('click', ()=>{
                                         // MULTI GAME MODE
 
 
-multiGameHandelr.forEach(elem=>{
-    elem.addEventListener('click', ()=>{
-    multiGameInputBox.style.display = 'grid'
-    // pick random letter
-    let letter = pickRandomLetter();
-    localStorage.setItem('randomLetterMulti', `${letter}`)
-    document.getElementById('random-letter-multi').innerHTML  = letter;  
 
-    // countDown Time     
-    timer()
-
-    })
+chatHanler.addEventListener('click', (event)=>{
+    const sock = io()
+    event.preventDefault()
+    let inputText = document.querySelector('#ctrl-chat input')
+    let text = inputText.value
+    // writeEvent(text)
+    inputText.value = ''    
+    sock.emit('message', text)
 })
 
+multiGameHandler.forEach(elem=>{
+    elem.addEventListener('click', ()=>{
+        const sock = io()
+        sock.on('message', writeEvent)        
+        multiGameInputBox.style.display = 'grid'        
+       
+    })
+
+
+    
+})
+
+multiAnswersForm.addEventListener('click', (event)=>{
+    const sock = io()
+    event.preventDefault()
+    const formAnswers = document.querySelector('#game-multi-input form')
+    let playerAnswers = collectPlayerAnswers(formAnswers)
+    console.log(playerAnswers)
+    sock.emit('answers', playerAnswers) 
+    formAnswers.reset()
+
+})
 
 // Timer
 

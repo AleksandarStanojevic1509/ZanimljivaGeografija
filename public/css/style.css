@@ -351,6 +351,8 @@ width: 100%;
   align-items: center;
 }
 #display-chat{
+  padding: 5px 10px;
+  overflow: auto;
   height: 10rem;
   width: 100%;
   background-color:#47cec14f;
@@ -367,10 +369,12 @@ box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.33);
   display: contents;
 }
 #game-multi-chat button{
- display: flex;
- justify-content: center;
+  display: flex;
+  justify-content: center;
 } 
-
+#ctrl-chat{
+  margin-top: 1rem;
+}
 /* result */
 #result-bck {
   background-color:  #cccccc8c;
