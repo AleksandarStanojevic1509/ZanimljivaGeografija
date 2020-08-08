@@ -2,10 +2,9 @@ import {fixInputValue, alertBox, checkFirstLetter} from "./general/general.js"
 import {hallBox, sortUsers, renderTable} from "./hallOfFame/hallOfFame.js"
 import {showModal, checkUser} from "./general/user.js"
 import {getWinner} from "./game/singleGame.js"
-import {pickRandomLetter, resetData, resetScoreTable, declareWinnerAlert, collectPlayerAnswers} from './game/game.js'
+import {pickRandomLetter, resetData, collectPlayerAnswers} from './game/game.js'
 import {addTerm} from "./general/addTerm.js"
 import {writeEvent} from './game/multiGame.js'
-// import {collectPlayerAnswers} from './game/game.js'
 
 const modal = document.getElementById ('modal-bck');
 const modalForm = document.querySelector('#log-in form');
@@ -26,6 +25,9 @@ const addTermForm = document.getElementById('add-term-form');
 const addTermHandler = document.getElementById('submit');
 const closeAddTermHandler = document.getElementById('close');
 const gifBox = document.getElementById('gif-bck');
+
+const helpHandler = document.getElementById('help')
+const closeHelpBox = document.querySelector('#help-box button')
 // singleGame
 const alertWinnerModal = document.querySelector('#alert-winner-bck');
 const closeResultHandler = document.getElementById('close-res');
@@ -110,10 +112,11 @@ addTermHandler.addEventListener('click', (event)=>{
     const fixedTerm = fixInputValue (inputText); 
     const category = inputCategory.value;
     
-    if (fixedTerm === '' && category === '' && fixedTerm === ' ' && category === ' ') return;
+    if (fixedTerm.value === '' && category === '' && fixedTerm.value === ' ' && category === ' ') {alert('sasa')}
+    // return;
 
     if (localStorage.getItem('username') === null){
-        alertBox(alertModal, alertMsg, alertTitle, 'Please enter username!!!', 'Oops...');
+        alertBox(alertModal, alertMsg, alertTitle, 'Unesite korisničko ime!!!', 'Oops...');
         addTermForm.reset();
         return;
     }
@@ -202,28 +205,30 @@ resetGame.addEventListener('click', ()=>{
 
                                         // MULTI GAME MODE
 
-
-
 chatHanler.addEventListener('click', (event)=>{
     const sock = io()
+    sock.on('start', gameStartsIn)
+
     event.preventDefault()
     let inputText = document.querySelector('#ctrl-chat input')
     let text = inputText.value
     // writeEvent(text)
     inputText.value = ''    
-    sock.emit('message', text)
+    sock.emit('message', `<span style="font-weight: 700;font-style: italic;color: brown;">${localStorage.username}</span>: ${text}`)
 })
 
 multiGameHandler.forEach(elem=>{
     elem.addEventListener('click', ()=>{
         const sock = io()
-        sock.on('message', writeEvent)        
+        sock.on('message', writeEvent)
+        sock.on('letter',  (letter) =>{
+            document.getElementById('random-letter-multi').innerHTML  = letter;
+        })
+        sock.on('timer', (time)=>{})        
         multiGameInputBox.style.display = 'grid'        
-       
+        
+        sock.emit('username', localStorage.username)
     })
-
-
-    
 })
 
 multiAnswersForm.addEventListener('click', (event)=>{
@@ -236,6 +241,17 @@ multiAnswersForm.addEventListener('click', (event)=>{
     formAnswers.reset()
 
 })
+
+// HelpHandler
+
+helpHandler.addEventListener('click', ()=>{
+    document.getElementById('help-modal-bck').style.display = 'block'
+})
+
+closeHelpBox.addEventListener('click', ()=>{
+    document.getElementById('help-modal-bck').style.display = 'none'
+})
+
 
 // Timer
 
@@ -269,3 +285,26 @@ function timer () {
 }, 1000);
 }
 
+
+
+let gameStartsIn = () => {
+
+    let counter = 4
+    // let timeleft = 4;
+    let timer = setInterval(() => {
+        counter -= 1;
+        document.getElementById('count-bck').style.display = 'block'
+        document.querySelector('#count-bck p').innerHTML = `Igra počinje za ${counter}`
+        // ukoliko dodje do nule klikni na dugme vezano za formu
+        if (counter == 0) {
+            document.getElementById('count-bck').style.display = 'none'
+            clearInterval(timer);
+            document.querySelector('#count-bck p').innerHTML = ''
+        }
+    }, 1000);
+    sock.emit('username', localStorage.prsUser)
+
+}
+
+
+// sa servera this.sendStart(true)

@@ -4,3 +4,14 @@ export const writeEvent = (text) =>{
     el.innerHTML = text;
     parent.appendChild(el)
 }
+
+
+// export const printRandomLetter = (letter) => {
+//     document.getElementById('random-letter-multi').innerHTML  = letter;
+// }
+
+export const gameStarsIn = () =>{
+    setTimeout(()=>{
+
+    },4000) 
+}

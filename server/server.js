@@ -17,31 +17,75 @@ const server = http.createServer(app)
 
 const io = socketio(server);
 
+
+let pickRandomLetter = () =>{
+    let letters = ["A", "B", "C", "Č", "Ć", "D", "Dž", "Đ", "E", "F", "G", "H", "I", "J", "K", "L", "Lj", "M", "N", "Nj", "O", "P", "R", "S", "Š", "T", "U", "V", "Z", "Ž"];
+    let random = Math.floor(Math.random()*letters.length);
+    return letters[random];
+}
+
+// let counter = () ={
+//   let int = setInterval(() => {
+      
+//   }, interval);
+// }
+
 let waitingPlayer = null
+let username1;
 
-io.on('connection', (sock)=>{
-    // console.log('Someone conected')
-    // sock.emit('message', 'Hi you are connected!')
+io.on('connection', sock => {
 
-    if (waitingPlayer){
-     new newGame(waitingPlayer,sock)
-        waitingPlayer = null
+    if(waitingPlayer) {
+        sock.on('username', username2 => {
+            if(username1 == username2) {
+                // Don't start game if usernames are the same
+                waitingPlayer = sock;
+                waitingPlayer.emit('message', 'Sačеkajte svog protivnika...');
+            } else {
+                // Start game if usernames are not the same
+                new newGame(waitingPlayer, sock);
+                waitingPlayer = null;
+                // liveGame.getRandomLetter(io);
+            }
+        })
+    } else {
+        // Wait for an opponent
+        waitingPlayer = sock;
+        waitingPlayer.on('username', username => {
+            username1 = username; // store waitingPlayer username
+        });
+        waitingPlayer.emit('message', 'Sačеkajte svog protivnika...')
     }
-    else{
-        waitingPlayer = sock
-        waitingPlayer.emit('message', 'Waiting for an oppponent!')
-    }
 
-    sock.on('message', text=>{
-        io.emit('message', text)
-    })
-
-    sock.on('answers', answ=>{
-        console.log(answ)
-    })
-})
+});
 
 
+
+
+
+// io.on('connection', (sock)=>{
+//     // console.log('Someone conected')
+//     // sock.emit('message', 'Hi you are connected!')
+
+//     if (waitingPlayer){
+//         new newGame(waitingPlayer, sock)
+//         let letter = pickRandomLetter()
+//         io.emit('letter' , letter)
+//         waitingPlayer = null
+//     }
+//     else{
+//         waitingPlayer = sock
+//         waitingPlayer.emit('message', 'Čeka se protivnik!')
+//     }
+
+//     sock.on('message', text=>{
+//         io.emit('message', text)
+//     })
+
+//     sock.on('turn', answ =>{
+//         console.log(answ)
+//     })
+// })
 
 server.on('error', err =>{
     console.error("Server error: ", err )

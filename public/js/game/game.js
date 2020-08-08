@@ -1,6 +1,6 @@
 import {fixInputValue} from '../general/general.js'
 
-const winnerTitle = document.querySelector ('#alert-winner h3')
+const winnerTitle = document.querySelector ('#alert-winner h4')
 const winnerScore = document.querySelector ('#alert-winner h5')
 
 export const collectPlayerAnswers = (playerForm) =>{
@@ -12,38 +12,6 @@ export const collectPlayerAnswers = (playerForm) =>{
     fixInputValue(playerForm.children[5].children[0]),
     fixInputValue(playerForm.children[6].children[0])]
 }
-
-export const resetScoreTable =  (table) =>{
-    table.children[0].children[1].innerHTML = '';
-    table.children[0].children[2].innerHTML = '';
-    table.children[0].children[3].innerHTML = '';
-    table.children[0].children[4].innerHTML = '';
-    table.children[1].children[1].innerHTML = '';
-    table.children[1].children[2].innerHTML = '';
-    table.children[1].children[3].innerHTML = '';
-    table.children[1].children[4].innerHTML = '';
-    table.children[2].children[1].innerHTML = '';
-    table.children[2].children[2].innerHTML = '';
-    table.children[2].children[3].innerHTML = '';
-    table.children[2].children[4].innerHTML = '';
-    table.children[3].children[1].innerHTML = '';
-    table.children[3].children[2].innerHTML = '';
-    table.children[3].children[3].innerHTML = '';
-    table.children[3].children[4].innerHTML = '';
-    table.children[4].children[1].innerHTML = '';
-    table.children[4].children[2].innerHTML = '';
-    table.children[4].children[3].innerHTML = '';
-    table.children[4].children[4].innerHTML = '';
-    table.children[5].children[1].innerHTML = '';
-    table.children[5].children[2].innerHTML = '';
-    table.children[5].children[3].innerHTML = '';
-    table.children[5].children[4].innerHTML = '';
-    table.children[6].children[1].innerHTML = '';
-    table.children[6].children[2].innerHTML = '';
-    table.children[6].children[3].innerHTML = '';
-    table.children[6].children[4].innerHTML = ''; 
-}
-
 
 export const pickRandomLetter = () =>{
     let letters = ["A", "B", "C", "Č", "Ć", "D", "Dž", "Đ", "E", "F", "G", "H", "I", "J", "K", "L", "Lj", "M", "N", "Nj", "O", "P", "R", "S", "Š", "T", "U", "V", "Z", "Ž"];
@@ -61,15 +29,15 @@ export let resetData = (userAnswersBox, playerForm) =>{
 
 export const declareWinnerAlert = (playerTotalPoints, oponentTotalPoints, oponentTitle)=>{
     if(playerTotalPoints > oponentTotalPoints){
-        winnerTitle.innerHTML = `${localStorage.username} wins!!!!`
-        winnerScore.innerHTML = `Your score is: ${playerTotalPoints}.`
+        winnerTitle.innerHTML = `${localStorage.username} je pobedio!!!!`
+        winnerScore.innerHTML = `Tvoj rezultat je: ${playerTotalPoints}.`
     }
     else if(playerTotalPoints < oponentTotalPoints){
         winnerTitle.innerHTML = oponentTitle 
-        winnerScore.innerHTML = `His score is: ${oponentTotalPoints}.`
+        winnerScore.innerHTML = `Njegov rezultat je: ${oponentTotalPoints}.`
     }
     else if(playerTotalPoints === oponentTotalPoints){
-        winnerTitle.innerHTML = `It is a draw!!!`
-        winnerScore.innerHTML = `You can try again.`
+        winnerTitle.innerHTML = `Nerešeno je!!!`
+        winnerScore.innerHTML = `Možete da pokušate ponovo.`
     }  
 }

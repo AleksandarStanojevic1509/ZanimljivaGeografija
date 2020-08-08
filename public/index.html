@@ -56,12 +56,28 @@
                 <img style="width:9rem"src="img/globe.gif" alt="">    
             </div>
             <div style="display: flex; flex-direction: column; justify-content: space-around; align-items:center">
-                <h3 style="margin: 0;"></h3>
+                <h4 style="margin: 0;"></h4>
                 <h5 style="margin: 0;"></h5>
                 <button class="btn" class="waves-effect waves-light btn-small">OK</button>
             </div>
         </div>
     </div>
+
+        <!-- help -->
+        <div id='help-modal-bck'>
+            <div id="help-box">
+                <div>
+                    <h5>Pravila Igre:</h5>
+                    <p>&nbsp;&nbsp;&nbsp;* Ako čitate ova pravila znači da ste veći izabrali <b>username</b>, međutim u svakom trenutku možete promeinti username klikom na <i style="border: 1px solid #26a69a;display: inline-flex;width: 27px;color: #26a69a;" class="material-icons">sync</i> ikonicu.</p>
+                    <p>&nbsp;&nbsp;&nbsp;* Takođe, ako želite možete učestvovati u popunjavanju baze. Termine možete predložiti klikom na <i style="border: 1px solid #26a69a;display: inline-flex;width: 30px;color: #26a69a;" class="material-icons"class="material-icons" > cloud_upload</i> ikonicu.</p>
+                    <p>&nbsp;&nbsp;&nbsp;* Igra se sastoji iz dva modula: <em>Igre protiv kompjutera</em> i <em>Igre protiv drugog igrača</em>. U oba slučaja igra počinje kada se klikne na <span style="border: 1px solid #26a69a;
+                        display: inline-flex;width: 70px;color: #26a69a;"><i class="material-icons">account_box</i> vs. <i class="material-icons">account_box</i></span> ili na <span style="border: 1px solid #26a69a;
+                        display: inline-flex;width: 70px;color: #26a69a;"><i class="material-icons">account_box</i> vs. <i class="material-icons">desktop_windows</i></span>. 
+                        Automaski se generise nasumično slovo, a za igrač ima 60 sekundi da unese svoje pojmove. Igrač klikom na dugme <b>POŠALjI</b> završava i igru i šalje svoje odgovore na proveru. </p>
+                </div>
+                <button class="btn" class="waves-effect waves-light btn-small">OK</button>
+            </div>
+        </div>
 
     <!-- hall of fame -->
     <div id='hall-modal-bck'>
@@ -72,6 +88,13 @@
                 </table>
             </div>
             <button class="btn" class="waves-effect waves-light btn-small">OK</button>
+        </div>
+    </div>
+
+
+    <div id='count-bck'>
+        <div id="count-box">
+            <p></p>
         </div>
     </div>
 
@@ -111,7 +134,7 @@
                     <input id="user-predmet" type="text" class="validate">
                     <label for="user-predmet">Predmet</label>
                 </div>
-                <button class="btn" class="waves-effect waves-light btn-small">Submit</button>
+                <button class="btn" class="waves-effect waves-light btn-small">Pošalji</button>
             </form>    
         </div>
     </div>
@@ -155,7 +178,7 @@
                             <input id="multi-user-predmet" type="text" class="validate">
                             <label for="multi-user-predmet">Predmet</label>
                         </div>
-                        <button class="btn" class="waves-effect waves-light btn-small">Submit</button>
+                        <button class="btn" class="waves-effect waves-light btn-small">Pošalji</button>
                     </form>    
                 </div>
                 <div id="game-multi-chat">
@@ -169,7 +192,7 @@
                         <form>
                             <div class="input-field col s6">
                                 <input id="multi-user-chat" type="text" class="validate">
-                                <label for="multi-user-chat">Type msg...</label>
+                                <label for="multi-user-chat">Napši poruku...</label>
                             </div>
                             <button id="chat-btn" class="btn"><span class="material-icons centar">send</span></button>
                             <!-- <input type="submit" value="Send Msg"> -->
@@ -180,20 +203,6 @@
             
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- resultat -->
     <div id="result-bck">
@@ -282,17 +291,22 @@
 
     <!-- HEADER -->
 
+    <span class="material-icons show-help-tooltip" data-tooltip="PRAVILA IGRE" id="help">help</span>
+
+
     <div>
         <nav>
             <div class="nav-wrapper">
-                <a id="logo" class="brand-logo"><span>geo</span><span style="margin: 6px 0 0 0; font-size: 35px;" class="material-icons sync">public</span><span>graphyGame</span></a>
+                <!-- <a id="logo" class="brand-logo"><span>geo</span><span style="margin: 6px 0 0 0; font-size: 35px;" class="material-icons sync">public</span><span>graphyGame</span></a> -->
+                <a id="logo" class="brand-logo"><span>zanimljivaGe</span><span style="margin: 6px 0 0 0; font-size: 35px;" class="material-icons sync">public</span><span>grafija</span></a>
+
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                <li class="list-elements"><a class="play-game-multi"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">account_box</i></a></li>
-                <li class="list-elements"><a class="play-game-single"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">desktop_windows</i></a></li>
-                <li class="list-elements"><a><i class="material-icons cloud-upload" style="margin: auto;">cloud_upload</i></a></li>
-                <li class="list-elements"><a><i class="material-icons sync" style="margin: auto;">sync</i></a></li>
-                <li><div class="is-user"><p>Hi, Anonymus</p></div></li>
+                <li data-tooltip="IGRAJ PROTIV DRUGOG IGRAČA" class="list-elements show-tooltip"><a class="play-game-multi"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">account_box</i></a></li>
+                <li data-tooltip="IGRAJ PROTIV KOMPJUTERA" class="list-elements show-tooltip"><a class="play-game-single"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">desktop_windows</i></a></li>
+                <li data-tooltip="DODAJ TERMIN" class="list-elements show-tooltip"><a><i class="material-icons cloud-upload" style="margin: auto;">cloud_upload</i></a></li>
+                <li data-tooltip="PROMENI KORISIKA" class="list-elements show-tooltip"><a><i class="material-icons sync" style="margin: auto;">sync</i></a></li>
+                <li><div class="is-user"><p>Zdravo, Anonymus</p></div></li>
                 </ul>
             </div>
         </nav>
@@ -309,8 +323,8 @@
 
     <div id="hall-of-fame-box">
         <div>
-            <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-terms">Hall Of Fame (terms)</button>
-            <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-score">Hall Of Fame (score)</button>
+            <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-terms">Najviše unetih termina</button>
+            <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-score">Najbolji rezultat</button>
         </div>
     </div>
 
@@ -322,13 +336,13 @@
         <div id="close"><p>+</p></div>
         <div class="input-field col s6">
             <input id="add-new-term" type="text" class="validate">
-            <label for="add-new-term">Enter term...</label>
+            <label for="add-new-term">Dodaj termin...</label>
         </div>
 
         <div>
             <div class="input-field col s12" style="width: 100%;">
                 <select name="" style="display: block;" id="cat-opt">
-                    <option disabled selected>Choose category...</option>
+                    <option disabled selected>Izaberi kategoriju...</option>
                     <option>Država</option>
                     <option>Grad</option>
                     <option>Reka</option> 
@@ -339,7 +353,7 @@
                 </select>
             </div>
         </div>
-        <button class="HoF waves-effect waves-light btn-small" id='submit'>Add to DB</button>
+        <button class="HoF waves-effect waves-light btn-small" id='submit'>Pošalji</button>
         <!-- <input id='submit' type="submit" value="Add to DB"> -->
     </form>
     
@@ -347,6 +361,12 @@
 
 
 
+<footer>
+    <div>
+        <h6>© Copyright ©2020 All rights reserved | This app is made by <a href="https://aleksandar-portfolio.web.app/">Aleksandar Stanojevic</a></h6>
+        <a href="https://itbootcamp.rs/" target="_blank"><img style="width: 9%;" src="./img/itbootcamp.png" alt=""></a>
+    </div>
+</footer>
 
 
 

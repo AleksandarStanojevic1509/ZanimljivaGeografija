@@ -8,7 +8,7 @@ export const showModal = (modalForm, inputValue, modal)=>{
     modalForm.addEventListener('submit', (event)=>{
         if  (inputValue.value === ''){
             event.preventDefault();
-            alertBox(alertModal, alertMsg, alertTitle, 'You need to enter username!!!', 'Oops...')
+            alertBox(alertModal, alertMsg, alertTitle, 'Morate da unesete korisničko ime!!!', 'Oops...')
         }
         else {
             event.preventDefault();
@@ -26,7 +26,7 @@ export const checkUser = (modalForm, inputValue, modal) =>{
             showModal(modalForm, inputValue, modal);
         }
         else if (localStorage.getItem('username') !== null){
-            elem.innerHTML = `Hi,&nbsp <span> ${localStorage.getItem('username')}</span>`
+            elem.innerHTML = `Zdravo,&nbsp <span> ${localStorage.getItem('username')}</span>`
             modal.style.display = 'none';
         }
     })

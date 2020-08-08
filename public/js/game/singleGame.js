@@ -2,16 +2,12 @@ import {collectPlayerAnswers, declareWinnerAlert} from './game.js'
 
 const resultTable = document.querySelector('#result-body')
 const finalScore = document.getElementById('score')
-const playerForm = document.querySelector('#game-answers form');
+// const playerForm = document.querySelector('#game-answers form');
 
 let category = ["Država", "Grad", "Reka", "Planina", "Životinja", "Biljka", "Predmet"]
 
 let playerTotalPoints = 0;
 let botTotalPoints = 0;
-
-
-
-// isBotExist, isUserExist, botAnswers[i], playerAnswers[i],
 
 const checkIfItIsTrue = (answers, bot, player, plTerm, plPoints, botTerm, botPoints)=>{   
     if(answers.includes(bot) && answers.includes(player)){
@@ -72,7 +68,7 @@ let finalAnswer = (chance, term) =>{
 }
 
 
-// //////// GENERISE KOMP ODGOVORE i PROVERAVA POBEDNIKA
+//////// GENERISE KOMP ODGOVORE i PROVERAVA POBEDNIKA
 export const getWinner = (playerForm) =>{
     let answer;
     let player = collectPlayerAnswers(playerForm)
@@ -128,9 +124,8 @@ export const getWinner = (playerForm) =>{
                 finalScore.children[0].innerHTML = `<p>${localStorage.username}: <span>${playerTotalPoints}</span></p>`;
                 finalScore.children[1].innerHTML = `<p>Kompjuter: <span>${botTotalPoints}</span></p>`;
                 if(elem === "Predmet"){
-                    declareWinnerAlert (playerTotalPoints, botTotalPoints, `Bot wins!!!!`)
+                    declareWinnerAlert (playerTotalPoints, botTotalPoints, `Kompjuter je pobedio!!!!`)
                 }
-                // return [playerTotalPoints, botTotalPoints]
             })
             playerTotalPoints = 0;
             botTotalPoints = 0;
@@ -138,7 +133,7 @@ export const getWinner = (playerForm) =>{
             document.querySelector('#alert-winner-bck').style.display = 'grid'
     })
     .catch((error) => {
-        alertBox(alertModal, alertMsg, alertTitle, 'Sorry, we have too many requests, please try later!', 'Oops!!!');
+        alertBox(alertModal, alertMsg, alertTitle, 'Žao nam je imamo previše zahteva. Pokušajte kasnije!', 'Oops!!!');
     });
 })
 }
@@ -255,7 +250,8 @@ export const getWinner = (playerForm) =>{
 //     }) 
 // } 
 
-
+// let user = 0
+// let bot = 0
 
 // export const getWinner = async()=>{
 // // let playerTotalPoints = 0;
@@ -272,15 +268,6 @@ export const getWinner = (playerForm) =>{
 //                                         generateBotAnswer('Biljka', localStorage.randomLetter),
 //                                         generateBotAnswer('Predmet', localStorage.randomLetter),
 //                                     ])
-
-
-// // let sss = ()=>{
-
-// // } 
-
-// let user = 0
-// let bot = 0
-
 
 // for (let i = 0; i<= category.length; i++){
     
@@ -318,8 +305,12 @@ export const getWinner = (playerForm) =>{
 //     // if(elem === "Predmet"){
 //         //     declareWinnerAlert (playerTotalPoints, botTotalPoints, `Bot wins!!!!`)
 //                     // }
-//         alert('asasas')
+//                     alert('asasas')
 
     
-    
+                    
+//                     setTimeout(()=>{
+//                         console.log('ssssSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
+                        
+//                     },6000)
 // }
