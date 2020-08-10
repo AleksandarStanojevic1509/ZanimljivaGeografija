@@ -5,6 +5,7 @@
 }
 body {
   background-color: rgb(228, 228, 228);
+  /* position: relative; */
 }
 
 /* MODAL */
@@ -196,6 +197,8 @@ th, td{
 /* nav */
 nav{
   background-color:  #26a69a !important ;
+  position: fixed;
+  z-index: 2;
 }
 .mobile-ul{
   width: 220px !important;
@@ -239,7 +242,7 @@ nav>div{
 }
 .play-game-single:hover, .play-game-multi:hover {
   cursor: pointer;
-  animation: flip 1.5s ease-out 0s alternate  infinite  none running;
+  animation: flash 4s ease-out 0s alternate  infinite  none running;
 
 }
 #gif-bck{
@@ -262,7 +265,7 @@ nav>div{
 #game-answers{
   animation: bounceInDown;
   animation-duration: 1s;
-  margin: 5rem auto 0 ;
+  margin: 6rem auto 6rem ;
   left: 0;
   right: 0;  
   position: absolute;
@@ -275,7 +278,7 @@ nav>div{
   box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
   display: grid;
   grid-template-rows: 1fr 6fr;
-  z-index: 99;
+  /* z-index: 99; */
 }
 /* #user-answers form{
   display: grid;
@@ -322,7 +325,7 @@ width: 100%;
 #game-multi-answers{
   animation: bounceInDown;
   animation-duration: 1s;
-  margin: 5rem auto 0 ;
+  margin: 6rem auto 6rem;
   left: 0;
   right: 0;  
   position: absolute;
@@ -335,7 +338,7 @@ width: 100%;
   box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
   display: grid;
   grid-template-rows: 1fr 6fr;
-  z-index: 99;
+  /* z-index: 99; */
 }
 /* #user-answers form{
   display: grid;
@@ -472,8 +475,10 @@ justify-content: space-around !important;
 #add-term-form{  
   animation: bounceInDown;
   animation-duration: 1s;
-  margin: 2rem auto ;
-  position: relative;
+  margin: 6rem auto 6rem;
+  left: 0;
+  right: 0;  
+  position: absolute;
   padding: 0 2rem;
   background-color: rgb(255, 255, 255) !important;
   width: 28rem;
@@ -481,7 +486,7 @@ justify-content: space-around !important;
   -webkit-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
   -moz-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
   box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
-  display: none;
+  display: grid;
   grid-template-rows: 2fr 2fr 1fr;
 }
 
@@ -516,6 +521,7 @@ option{
   width: 100%;
   display: flex; 
   justify-content: space-around;
+  padding-top: 6rem;
 }
 #hall-of-fame-box div{
   width: 45rem; 
@@ -539,7 +545,8 @@ footer{
   /* padding: 10px; */
 }
 footer a{
-  color: brown;
+  color: rgb(255, 255, 255);
+  text-decoration: underline;
 }
 
 
@@ -577,16 +584,16 @@ footer a{
 
 } */
 /* HELP */
-#help {
+.help {
   position: absolute;
   right: 0;
   top: 0;
   margin: 6rem 2%;
   color: #26a69a !important;
   transition: 500ms transform;
-  font-size: 2.5rem;
+  font-size: 2.5rem !important;
 }
-#help:hover{
+.help:hover{
   transform: scale(1.7);
   cursor: pointer;
 }
@@ -675,11 +682,12 @@ footer a{
 
 /* media query */
 @media only screen and (max-width: 992px) {
-  #help{
+  .help{
     margin: 1rem 2%;
+    z-index: 3;
     color: #ffffff !important;
   }
-  #help:hover{
+  .help:hover{
     transform: scale(1.5);
   }
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zanimljivaGeografija</title>
     <link rel="icon" href="img/icon.png" />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
@@ -16,35 +16,7 @@
 <body>
     
     
-
-
-        
-     
-
-
-
-    <!-- hall of fame -->
-    <div id='hall-modal-bck'>
-        <div id="hall">
-            <h4>Hall Of Fame</h4>
-            <div>
-                <table class="centered">
-                </table>
-            </div>
-            <button class="btn" class="waves-effect waves-light btn-small">OK</button>
-        </div>
-    </div>
-
-
-    <div id='count-bck'>
-        <div id="count-box">
-            <p></p>
-        </div>
-    </div>
-
-  
-
-
+ 
 
     <!-- game rules -->
     <div id='help-modal-bck'>        
@@ -92,13 +64,13 @@
         <nav>
             <div class="nav-wrapper">
                 <!-- <a id="logo" class="brand-logo"><span>geo</span><span style="margin: 6px 0 0 0; font-size: 35px;" class="material-icons sync">public</span><span>graphyGame</span></a> -->
-                <a href="index.html" id="logo" class="brand-logo"><span>zanimljivaGe</span><span style="margin: 6px 0 0 0; font-size: 35px;" class="material-icons sync">public</span><span>grafija</span></a>
+                <a href="../index.html" id="logo" class="brand-logo"><span>zanimljivaGe</span><span style="margin: 6px 0 0 0; font-size: 35px;" class="material-icons sync">public</span><span>grafija</span></a>
 
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                <li data-tooltip="IGRAJ PROTIV DRUGOG IGRAČA" class="list-elements show-tooltip"><a href="html/multiPlayer.html" class="play-game-multi"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">account_box</i></a></li>
-                <li data-tooltip="IGRAJ PROTIV KOMPJUTERA" class="list-elements show-tooltip"><a href="html/singlePlayer.html" class="play-game-single"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">desktop_windows</i></a></li>
-                <li data-tooltip="DODAJ TERMIN" class="list-elements show-tooltip"><a href="html/addTerm.html"><i class="material-icons cloud-upload" style="margin: auto;">cloud_upload</i></a></li>
+                <li data-tooltip="IGRAJ PROTIV DRUGOG IGRAČA" class="list-elements show-tooltip"><a href="multiPlayer.html" class="play-game-multi"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">account_box</i></a></li>
+                <li data-tooltip="IGRAJ PROTIV KOMPJUTERA" class="list-elements show-tooltip"><a href="singlePlayer.html" class="play-game-single"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">desktop_windows</i></a></li>
+                <li data-tooltip="DODAJ TERMIN" class="list-elements show-tooltip"><a href="addTerm.html"><i class="material-icons cloud-upload" style="margin: auto;">cloud_upload</i></a></li>
                 <li data-tooltip="PROMENI KORISIKA" class="list-elements show-tooltip"><a><i class="material-icons sync" style="margin: auto;">sync</i></a></li>
                 <li><div class="is-user"><p>Zdravo, Anonymus</p></div></li>
                 </ul>
@@ -106,26 +78,43 @@
         </nav>
         
         <ul class="sidenav mobile-ul" id="mobile-demo">
-            <li><a href="html/multiPlayer.html" ><div class="mobile-list-elem play-game-multi"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">account_box</i></div></a></li>
-            <li><a href="html/singlePlayer.html"><div class="mobile-list-elem play-game-single"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">desktop_windows</i></div></a></li>        
-            <li><a href="html/addTerm.html" style="display: flex;"><i class="material-icons cloud-upload" style="margin: auto; color: #26a69a !important ;;">cloud_upload</i></a></li>
+            <li><a href="multiPlayer.html"><div class="mobile-list-elem play-game-multi"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">account_box</i></div></a></li>
+            <li><a href="singlePlayer.html"><div class="mobile-list-elem play-game-single"><i class="material-icons left ">account_box</i> vs. <i class="material-icons right">desktop_windows</i></div></a></li>        
+            <li><a href="addTerm.html" style="display: flex;"><i class="material-icons cloud-upload" style="margin: auto; color: #26a69a !important ;;">cloud_upload</i></a></li>
             <li><a style="display: flex;"><i class="material-icons sync" style="margin: auto; color: #26a69a !important ;;">sync</i></a></li>
             <li style="text-align: center;"><a><div class="is-user" ></div></a></li>
         </ul>
     </div>
             
 
-    <div id="hall-of-fame-box">
-        <div>
-            <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-terms">Najviše unetih termina</button>
-            <button class="HoF waves-effect waves-light btn-small" id="hall-of-fame-score">Najbolji rezultat</button>
+   
+
+    <form id="add-term-form">
+        <!-- <div id="close"><p>+</p></div> -->
+        <div class="input-field col s6">
+            <input id="add-new-term" type="text" class="validate">
+            <label for="add-new-term">Dodaj termin...</label>
         </div>
-    </div>
 
-    <div id="gif-bck" >
-        <img src="img/globe.gif"  alt="">
-    </div>
-
+        <div>
+            <div class="input-field col s12" style="width: 100%;">
+                <select name="" style="display: block;" id="cat-opt">
+                    <option disabled selected>Izaberi kategoriju...</option>
+                    <option>Država</option>
+                    <option>Grad</option>
+                    <option>Reka</option> 
+                    <option>Planina</option> 
+                    <option>Životinja</option> 
+                    <option>Biljka</option> 
+                    <option>Predmet</option> 
+                </select>
+            </div>
+        </div>
+        <button class="HoF waves-effect waves-light btn-small" id='submit'>Pošalji</button>
+        <!-- <input id='submit' type="submit" value="Add to DB"> -->
+    </form>
+    
+   
     
 
 
@@ -134,7 +123,7 @@
 <footer>
     <div>
         <h6>© Copyright ©2020 All rights reserved | This app is made by <a href="https://aleksandar-portfolio.web.app/">Aleksandar Stanojevic</a></h6>
-        <a href="https://itbootcamp.rs/" target="_blank"><img style="width: 9%;" src="./img/itbootcamp.png" alt=""></a>
+        <a href="https://itbootcamp.rs/" target="_blank"><img style="width: 9%;" src="../img/itbootcamp.png" alt=""></a>
     </div>
 </footer>
 
@@ -161,7 +150,8 @@
         });
     });
     </script>
-    <script src="js/app.js" type="module"></script>
+    <script src="../js/app.js" type="module"></script>
+    <script src="../js/general/addTerm.js" type="module"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js" ></script>
     <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js" ></script>
     <script>

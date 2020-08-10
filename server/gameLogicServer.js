@@ -4,12 +4,19 @@ class newGame {
         this.turns = [null, null]
 
         this.sendMsgToAll("Početak igre!");
-        this.sendStart(true)
+        this.sendStart('Pocetak')
 
         this.players.forEach( (player, index) => {
             player.on('answers', (answ) => {
                 console.log(answ)
-                this.onTurns(index, answ)
+                // this.onTurns(index, answ)
+            })
+        })
+
+        this.players.forEach( (player, index) => {
+            player.on('username', (answ) => {
+                console.log(answ)
+                // this.onTurns(index, answ)
             })
         })
 
@@ -17,6 +24,7 @@ class newGame {
     }
 
     sendMsgToPlayer(playerIndex, msg) {
+        console.log (msg)
         this.players[playerIndex].emit('message', msg)
     }
 

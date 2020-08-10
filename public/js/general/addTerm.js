@@ -1,10 +1,18 @@
-import {alertBox} from "./general.js"
 
-// const alertModal = document.querySelector('#alert-modal-bck');
-// const alertMsg = document.querySelector('#alert-modal-bck h5');
-// const alertTitle = document.querySelector('#alert-modal-bck h3');
+import { fixInputValue, alertBox, checkFirstLetter } from "./general.js";
 
-export const addTerm = (fixedTerm, firstLetter, category, inputCategory, alertModal, alertMsg, alertTitle) =>{
+//dom.add term to DB
+const inputText = document.getElementById('add-new-term');
+const inputCategory = document.getElementById('cat-opt');
+const addTermForm = document.getElementById('add-term-form');
+const addTermHandler = document.getElementById('submit');
+const alertModal = document.querySelector('#alert-modal-bck');
+const alertMsg = document.querySelector('#alert-modal-bck h5');
+const alertTitle = document.querySelector('#alert-modal-bck h3');
+const btnAlertClose = document.querySelector ('#alert button');
+
+
+const addTerm = (fixedTerm, firstLetter, category, inputCategory, alertModal, alertMsg, alertTitle) =>{
 
     db.collection("pojmovi")
     .where("pojam", "==", `${fixedTerm}`)
@@ -14,7 +22,7 @@ export const addTerm = (fixedTerm, firstLetter, category, inputCategory, alertMo
     .then((querySnapshot) => {
         if (querySnapshot.size > 0) {
             querySnapshot.docs.forEach((doc) => {
-            alertBox(alertModal, alertMsg, alertTitle, 'The term already exists!!!', 'Oops...');
+            alertBox(alertModal, alertMsg, alertTitle, 'Termin već postoji!!!', 'Oops...');
         }) 
     }
     else {
@@ -26,7 +34,7 @@ export const addTerm = (fixedTerm, firstLetter, category, inputCategory, alertMo
                 pojam:fixedTerm,
                 vreme:firebase.firestore.Timestamp.fromDate(date)
             })
-            alertBox(alertModal, alertMsg, alertTitle, 'The term added to DB!!!', 'Congrats!!!');
+            alertBox(alertModal, alertMsg, alertTitle, 'Termin uspešno unet u DB!!!', 'Čestitamo!!!');
         }
     })
     .catch((error) => {
@@ -34,3 +42,26 @@ export const addTerm = (fixedTerm, firstLetter, category, inputCategory, alertMo
     });
     
 }
+
+// add term
+addTermHandler.addEventListener('click', (event)=>{
+    event.preventDefault();
+    
+    const fixedTerm = fixInputValue (inputText); 
+    const category = inputCategory.value;
+    
+    if (fixedTerm.value === '' && category === '' && fixedTerm.value === ' ' && category === ' ') return ;
+
+    if (localStorage.getItem('username') === null){
+        alertBox(alertModal, alertMsg, alertTitle, 'Unesite korisničko ime!!!', 'Oops...');
+        addTermForm.reset();
+        return;
+    }
+
+    const firstLetter = checkFirstLetter(fixedTerm);   
+    
+    addTerm(fixedTerm, firstLetter, category, inputCategory, alertModal, alertMsg, alertTitle);
+    
+    addTermForm.reset();
+
+})

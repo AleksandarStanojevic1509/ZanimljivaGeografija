@@ -24,11 +24,7 @@ let pickRandomLetter = () =>{
     return letters[random];
 }
 
-// let counter = () ={
-//   let int = setInterval(() => {
-      
-//   }, interval);
-// }
+ 
 
 let waitingPlayer = null
 let username1;
@@ -45,7 +41,9 @@ io.on('connection', sock => {
                 // Start game if usernames are not the same
                 new newGame(waitingPlayer, sock);
                 waitingPlayer = null;
-                // liveGame.getRandomLetter(io);
+                let letter = pickRandomLetter()
+                io.emit('letter' , letter)
+           
             }
         })
     } else {
@@ -57,6 +55,9 @@ io.on('connection', sock => {
         waitingPlayer.emit('message', 'Sačеkajte svog protivnika...')
     }
 
+    sock.on('chat', text=>{
+        io.emit('chat', text)
+    })
 });
 
 
@@ -68,10 +69,14 @@ io.on('connection', sock => {
 //     // sock.emit('message', 'Hi you are connected!')
 
 //     if (waitingPlayer){
-//         new newGame(waitingPlayer, sock)
-//         let letter = pickRandomLetter()
-//         io.emit('letter' , letter)
-//         waitingPlayer = null
+//                new newGame(waitingPlayer, sock);
+//                 waitingPlayer = null;
+//                 let letter = pickRandomLetter()
+//                 io.emit('letter' , letter)
+
+//                 sock.on('chat', text=>{
+//                     io.emit('chat', text)
+//                 })
 //     }
 //     else{
 //         waitingPlayer = sock
@@ -91,6 +96,6 @@ server.on('error', err =>{
     console.error("Server error: ", err )
 })
 
-server.listen(8800, () =>{
-    console.log('app started at 8008')
+server.listen(8000, () =>{
+    console.log('app started at 8800')
 })
