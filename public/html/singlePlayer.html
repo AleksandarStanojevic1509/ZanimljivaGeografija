@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zanimljivaGeografija</title>
-    <link rel="icon" href="img/icon.png" />
+    <link rel="icon" href="../img/icon.png" />
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
-    
+
     <!-- game rules -->
     <div id='help-modal-bck'>        
     </div>
@@ -80,64 +80,156 @@
             <li style="text-align: center;"><a><div class="is-user" ></div></a></li>
         </ul>
     </div>
-            
-
-   
+              
 
     <!-- game input single-->
-
-        <div id="game-answers">
-            <div>
-                <h2 style="font-style: italic;" id="random-letter">E</h2>
-                <h2 class="time-to-end"></h2>
-            </div>
-            <form>
-                <div class="input-field col s6">
-                    <input id="user-drzava" type="text" class="validate">
-                    <label for="user-drzava">Država</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="user-grad" type="text" class="validate">
-                    <label for="user-grad">Grad</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="user-reka" type="text" class="validate">
-                    <label for="user-reka">Reka</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="user-planina" type="text" class="validate">
-                    <label for="user-planina">Planina</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="user-zivotinja" type="text" class="validate">
-                    <label for="user-zivotinja">Životinja</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="user-biljka" type="text" class="validate">
-                    <label for="user-biljka">Biljka</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="user-predmet" type="text" class="validate">
-                    <label for="user-predmet">Predmet</label>
-                </div>
-                <button class="btn" class="waves-effect waves-light btn-small">Pošalji</button>
-            </form>    
+    <div id="game-answers">
+        <div>
+            <h2 style="font-style: italic;" id="random-letter">E</h2>
+            <h2 class="time-to-end"></h2>
         </div>
-
-
-
-    
-    
-
-
-
-
-<footer>
-    <div>
-        <h6>© Copyright ©2020 All rights reserved | This app is made by <a href="https://aleksandar-portfolio.web.app/">Aleksandar Stanojevic</a></h6>
-        <a href="https://itbootcamp.rs/" target="_blank"><img style="width: 9%;" src="../img/itbootcamp.png" alt=""></a>
+        <form>
+            <div class="input-field col s6">
+                <input id="user-drzava" type="text" class="validate">
+                <label for="user-drzava">Država</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="user-grad" type="text" class="validate">
+                <label for="user-grad">Grad</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="user-reka" type="text" class="validate">
+                <label for="user-reka">Reka</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="user-planina" type="text" class="validate">
+                <label for="user-planina">Planina</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="user-zivotinja" type="text" class="validate">
+                <label for="user-zivotinja">Životinja</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="user-biljka" type="text" class="validate">
+                <label for="user-biljka">Biljka</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="user-predmet" type="text" class="validate">
+                <label for="user-predmet">Predmet</label>
+            </div>
+            <button class="btn" class="waves-effect waves-light btn-small">Pošalji</button>
+        </form>    
     </div>
-</footer>
+
+    <!-- result -->
+
+    <div id="result-bck">
+        <div id="result">
+            <!-- <div id="close-res"><p>+</p></div> -->
+            <div><h3>Rezultat:</h3></div>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="text-align: left;">Kategorija</th>
+                            <th class="user-bck-td" id="res-user">User</th>
+                            <th class="user-bck-td">Poeni</th>
+                            <th class="bot-bck-td">Kompjuter</th>
+                            <th class="bot-bck-td">Poeni</th>
+                        </tr>
+                    </thead>
+            
+                    <tbody id="result-body">
+                        <tr>
+                            <td class="result-cat">Država</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td user-poen"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Grad</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td user-poen"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Reka</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Planina</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Životinja</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Biljka</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Predmet</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                    </tbody>
+                </table>    
+            </div>
+            <div id="score">
+                <div>
+                </div>
+                <div>
+                </div>              
+            </div>
+
+            <div>
+                <button class="btn">Nova igra!</button>
+            </div>
+                    
+        </div>
+    </div>
+
+    
+    <!-- alert Winner -->
+    <div id='alert-winner-bck'>
+        <div id="alert-winner">
+            <div style="display: flex;justify-content: center;align-items: center;">
+                <img style="width:9rem" src="../img/globe.gif" alt="">    
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: space-around; align-items:center">
+                <h4 style="margin: 0;"></h4>
+                <h5 style="margin: 0;"></h5>
+                <button class="btn" class="waves-effect waves-light btn-small">OK</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- footer -->
+    <footer>
+        <div>
+            <h6>© Copyright ©2020 All rights reserved | This app is made by <a href="https://aleksandar-portfolio.web.app/">Aleksandar Stanojevic</a></h6>
+            <a href="https://itbootcamp.rs/" target="_blank"><img style="width: 9%;" src="../img/itbootcamp.png" alt=""></a>
+        </div>
+    </footer>
 
 
 
@@ -163,6 +255,7 @@
     });
     </script>
     <script src="../js/app.js" type="module"></script>
+    <script src="../js/game/singleGame.js" type="module"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js" ></script>
     <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js" ></script>
     <script>

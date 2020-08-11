@@ -19,11 +19,10 @@ export const pickRandomLetter = () =>{
     return letters[random];
 }
 
-export let resetData = (userAnswersBox, playerForm) =>{
+export let resetData = (playerForm) =>{
     document.querySelectorAll('.time-to-end').forEach(elem=>{
         elem.innerHTML = '';
     })
-    userAnswersBox.style.display = 'none';
     playerForm.reset();
 }
 

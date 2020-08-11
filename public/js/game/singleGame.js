@@ -1,14 +1,60 @@
-import {collectPlayerAnswers, declareWinnerAlert} from './game.js'
+// modules
+import {collectPlayerAnswers, declareWinnerAlert, pickRandomLetter, resetData} from './game.js'
+import { alertBox } from '../general/general.js';
 
-const resultTable = document.querySelector('#result-body')
-const finalScore = document.getElementById('score')
-// const playerForm = document.querySelector('#game-answers form');
+// DOM
+const singleGameSubmitBtn = document.querySelector('#game-answers button');
+const resultTable = document.querySelector('#result-body');
+const finalScore = document.getElementById('score');
+const playerForm = document.querySelector('#game-answers form');
+const resultBackgound = document.getElementById('result-bck');
+const alertWinnerModal = document.querySelector('#alert-winner-bck');
+// const closeResultHandler = document.getElementById('close-res');
+const resetGame = document.querySelector('#result button');
 
-let category = ["Država", "Grad", "Reka", "Planina", "Životinja", "Biljka", "Predmet"]
 
+
+// Variables
+let gameTime;
+let countDown = 61;
 let playerTotalPoints = 0;
 let botTotalPoints = 0;
+const category = ["Država", "Grad", "Reka", "Planina", "Životinja", "Biljka", "Predmet"];
 
+
+// function
+// function.create timer
+const singlPlayerTimer = () => {
+    gameTime = setInterval( () => {
+        if(countDown === 0){
+            // submituj formu i proglasi pobednika
+
+            getWinner(playerForm);
+            resultBackgound.style.display = 'block';
+            // reset countDown Time 
+            clearInterval(gameTime);
+            countDown = 61;
+            resetData(userAnswersBox, playerForm);
+        }
+    else {
+        countDown--;
+        let createTime = new Date (countDown * 1000);
+        let sec = createTime.getMinutes()*60 + createTime.getSeconds() ; 
+        if(sec < 10){
+            document.querySelectorAll('.time-to-end').forEach(elem=>{
+                elem.innerHTML = `<span style="color:red">${sec}<span>`;
+            })
+        }
+        else{
+            document.querySelectorAll('.time-to-end').forEach(elem=>{
+                elem.innerHTML = `<span style="color:black">${sec}<span>`;
+            })
+        }
+    }
+}, 1000);
+}
+
+// function.add points
 const checkIfItIsTrue = (answers, bot, player, plTerm, plPoints, botTerm, botPoints)=>{   
     if(answers.includes(bot) && answers.includes(player)){
         if(bot === player ){
@@ -58,7 +104,8 @@ const checkIfItIsTrue = (answers, bot, player, plTerm, plPoints, botTerm, botPoi
     }
 }
 
-let finalAnswer = (chance, term) =>{
+// function.computer level
+const finalAnswer = (chance, term) =>{
     if (chance < 0.2){            
         return '';
     }
@@ -67,9 +114,8 @@ let finalAnswer = (chance, term) =>{
     }
 }
 
-
-//////// GENERISE KOMP ODGOVORE i PROVERAVA POBEDNIKA
-export const getWinner = (playerForm) =>{
+// function.henerate computer answers and check answers
+const getWinner = (playerForm) =>{
     let answer;
     let player = collectPlayerAnswers(playerForm)
     let possibleAnswers = [];
@@ -138,179 +184,64 @@ export const getWinner = (playerForm) =>{
 })
 }
 
-///// DRUGI NACIN
+
+//listeners
+
+// submit when time up
+window.addEventListener('load', ()=>{
+    let letter = pickRandomLetter();
+    localStorage.setItem('randomLetter', `${letter}`);
+    document.getElementById('random-letter').innerHTML  = letter;  
+    singlPlayerTimer();    
+})
 
 
-// const generateBotAnswer = (category, firstLetter) =>{
-//     let singleAnswer = new Promise ((resolve, reject)=>{
-//         let answer;
-//         let key = db.collection('pojmovi').doc().id;
-//         // console.log(key)
-//         db.collection('pojmovi')
-//         .where('kategorija', '==', category)
-//         .where('pocetnoSlovo', '==', firstLetter)
-//         .where(firebase.firestore.FieldPath.documentId(), '>=', key)
-//         .limit(1)
-//         .get()
-//         .then(snapshot => {
-//             const randomIndex = Math.floor(Math.random() * snapshot.docs.length);
-//             if (snapshot.docs[randomIndex] === undefined){
-//                 answer = '';
-//             }
-//             else {
-//                 answer = finalAnswer(Math.random(), snapshot.docs[randomIndex].data().pojam);
-//             }           
-//             resolve(answer);
-//         })
-//     }) 
-//     return singleAnswer;
-// }
+//submit answers
+singleGameSubmitBtn.addEventListener('click', (event)=>{
+    event.preventDefault();   
+
+    getWinner (playerForm);
+    resultBackgound.style.display = 'block';  
+ 
+    resetData(playerForm);
+    clearInterval(gameTime);
+    countDown = 61; 
+})
+
+
+// close result box
+// closeResultHandler.addEventListener('click', ()=>{
+//     resultBackgound.style.display = 'none';
+// })
+
+// alert with winner and socore
+alertWinnerModal.addEventListener('click', event => {
+    event.stopPropagation()
+    if (event.target.tagName === 'BUTTON'){
+        alertWinnerModal.style.display = 'none'
+    }
+
+})
+
+// reset game
+resetGame.addEventListener('click', ()=>{
+    resultBackgound.style.display = 'none'
+    document.querySelector('.time-to-end').innerHTML = '';
+
+    let letter = pickRandomLetter();
+    localStorage.setItem('randomLetter', `${letter}`);
+    document.getElementById('random-letter').innerHTML  = letter;  
+    // countDown Time     
+    singlPlayerTimer();
+})   
 
 
 
-// let checkIfItIsTrue = (isBotExist, isUserExist, bot, player,  plTerm, plPoints, botTerm, botPoints)=>{
-    
-//     return new Promise((resolve,reject)=>{
-
-//         if(isBotExist && isUserExist){
-//             if(bot === player ){
-//                 console.log('test')
-//                 plTerm.innerHTML = `${player} `;
-//                 botTerm.innerHTML = `${bot}`;
-//                 plPoints.innerHTML = `+5`;
-//                 botPoints.innerHTML = `+5`;
-//                 resolve ([5,5])
-//                 // playerTotalPoints += 5;
-//                 // botTotalPoints += 5;
-//             }
-//             else {
-//                 plTerm.innerHTML = `${player} `;
-//                 botTerm.innerHTML = `${bot}`;
-//                 plPoints.innerHTML = `+10`;
-//                 botPoints.innerHTML = `+10`;
-//                 resolve ([10,10])
-//                 // playerTotalPoints += 10;
-//                 // botTotalPoints += 10;
-//             }
-//         }
-//         else if(isBotExist){
-//             plTerm.innerHTML = `<span style="color:tomato; font-weight:500">X</span>`;
-//             botTerm.innerHTML = `${bot}`;
-//             plPoints.innerHTML = `+0`;
-//             botPoints.innerHTML = `+15`;
-//             resolve ([0,15])
-//             // playerTotalPoints += 0;
-//             // botTotalPoints += 15;
-//         }
-//         else if (isUserExist){
-//             plTerm.innerHTML = `${player}`
-//             botTerm.innerHTML = `<span style="color:tomato; font-weight:500">X</span>`;
-//             plPoints.innerHTML = `+15`;
-//             botPoints.innerHTML = `+0`;
-//             resolve ([15,0])
-//             // playerTotalPoints += 15;
-//             // botTotalPoints += 0;    
-//         }
-//         else {
-//             plTerm.innerHTML = `<span style="color:tomato; font-weight:500">X</span>`;
-//             botTerm.innerHTML = `<span style="color:tomato; font-weight:500">X</span>`;
-//             plPoints.innerHTML = `+0`;
-//             botPoints.innerHTML = `+0`;
-//             resolve ([0,0])
-//             // playerTotalPoints += 0;
-//             // botTotalPoints += 0;
-//         }
-    
-
-//     })
-    
-    
-    
-// }
 
 
-// const checkAnsw = (cat, term) => {   
-//     return new Promise((resolve, reject)=>{
 
-//         db.collection("pojmovi")
-//             .where("pocetnoSlovo", "==", `${localStorage.randomLetter}`)
-//             .where("kategorija", "==", cat)
-//             .where("pojam", "==", term)
-//             .get()
-//             .then(querySnapshot =>{
-//                 if (querySnapshot.size > 0){
-//                     // console.log('ima')
-//                     resolve (true) 
-//                 }
-//                 else {
-//                     // console.log('nema')
-//                     resolve(false)
-//                 }                
-//         })
-//     }) 
-// } 
 
-// let user = 0
-// let bot = 0
 
-// export const getWinner = async()=>{
-// // let playerTotalPoints = 0;
-// // let botTotalPoints = 0;
 
-//     console.log('POCETAK')
 
-//     let playerAnswers = collectPlayerAnswers(playerForm)
-//     let botAnswers = await Promise.all([generateBotAnswer('Država', localStorage.randomLetter), 
-//                                         generateBotAnswer('Grad', localStorage.randomLetter),
-//                                         generateBotAnswer('Reka', localStorage.randomLetter),
-//                                         generateBotAnswer('Planina', localStorage.randomLetter),
-//                                         generateBotAnswer('Životinja', localStorage.randomLetter),
-//                                         generateBotAnswer('Biljka', localStorage.randomLetter),
-//                                         generateBotAnswer('Predmet', localStorage.randomLetter),
-//                                     ])
 
-// for (let i = 0; i<= category.length; i++){
-    
-//     // console.log (category[i], playerAnswers[i], botAnswers[i])
-//     let isBotExist = await checkAnsw (category[i], botAnswers[i])
-//     let isUserExist = await checkAnsw (category[i], playerAnswers[i])
-    
-//         // console.log("bot " + botAnswers[i] +' ' + isBotExist)
-//         // console.log("user " + playerAnswers[i] +' '  + isUserExist)
-        
-//         let getScore = await checkIfItIsTrue(isBotExist, isUserExist, botAnswers[i], playerAnswers[i], resultTable.children[i].children[1], resultTable.children[i].children[2], resultTable.children[i].children[3], resultTable.children[i].children[4])
-        
-//         console.log('rezultat usera  ' + getScore[0])
-//         console.log('rezultat bota  ' + getScore[1])
-        
-//         user += getScore[0]
-//         bot += getScore [1]
-        
-//         finalScore.children[0].innerHTML = `<p>${localStorage.username}: <span>${user}</span></p>`;
-//         finalScore.children[1].innerHTML = `<p>Kompjuter: <span>${bot}</span></p>`;
-        
-//         // 
-//         console.log('KRAJssssssss')
-//     }     
-
-    
-//     // console.log('asasasasa')
-//     // declareWinnerAlert (user, bot, `Bot wins!!!!`)
-    
-//     // console.log('KONACNI REZULTAT' + user, bot)
-//     // console.log (user, bot)
-    
-//     console.log('KRAJ')
-    
-//     // if(elem === "Predmet"){
-//         //     declareWinnerAlert (playerTotalPoints, botTotalPoints, `Bot wins!!!!`)
-//                     // }
-//                     alert('asasas')
-
-    
-                    
-//                     setTimeout(()=>{
-//                         console.log('ssssSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
-                        
-//                     },6000)
-// }

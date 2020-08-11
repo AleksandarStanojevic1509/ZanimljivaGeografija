@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zanimljivaGeografija</title>
-    <link rel="icon" href="img/icon.png" />
+    <link rel="icon" href="../img/icon.png" />
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -82,73 +82,167 @@
         </ul>
     </div>
             
-
-   
-
- 
-   
-        <div id="game-multi-answers">
-            <div id="game-multi-header"> 
-                <h2 style="font-style: italic;" id="random-letter-multi"></h2>
-                <h2 class="time-to-end"></h2>
+     <!-- game input multi -->
+    <div id="game-multi-answers">
+        <div id="game-multi-header"> 
+            <h2 style="font-style: italic;" id="random-letter-multi"></h2>
+            <h2 class="time-to-end"></h2>
+        </div>
+        <div id="input-chat-wraper">
+            <div id="game-multi-input">
+                <form>
+                    <div class="input-field col s6">
+                        <input id="multi-user-drzava" type="text" class="validate">
+                        <label for="multi-user-drzava">Država</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="multi-user-grad" type="text" class="validate">
+                        <label for="multi-user-grad">Grad</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="multi-user-reka" type="text" class="validate">
+                        <label for="multi-user-reka">Reka</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="multi-user-planina" type="text" class="validate">
+                        <label for="multi-user-planina">Planina</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="multi-user-zivotinja" type="text" class="validate">
+                        <label for="multi-user-zivotinja">Životinja</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="multi-user-biljka" type="text" class="validate">
+                        <label for="multi-user-biljka">Biljka</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="multi-user-predmet" type="text" class="validate">
+                        <label for="multi-user-predmet">Predmet</label>
+                    </div>
+                    <button class="btn" class="waves-effect waves-light btn-small">Pošalji</button>
+                </form>    
             </div>
-            <div id="input-chat-wraper">
-                <div id="game-multi-input">
+            <div id="game-multi-chat">
+                <h4>Chat</h4>
+                <div id="display-chat">
+                    <ul>
+                        
+                    </ul>
+                </div>
+                <div id="ctrl-chat">
                     <form>
                         <div class="input-field col s6">
-                            <input id="multi-user-drzava" type="text" class="validate">
-                            <label for="multi-user-drzava">Država</label>
+                            <input id="multi-user-chat" type="text" class="validate">
+                            <label for="multi-user-chat">Napši poruku...</label>
                         </div>
-                        <div class="input-field col s6">
-                            <input id="multi-user-grad" type="text" class="validate">
-                            <label for="multi-user-grad">Grad</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="multi-user-reka" type="text" class="validate">
-                            <label for="multi-user-reka">Reka</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="multi-user-planina" type="text" class="validate">
-                            <label for="multi-user-planina">Planina</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="multi-user-zivotinja" type="text" class="validate">
-                            <label for="multi-user-zivotinja">Životinja</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="multi-user-biljka" type="text" class="validate">
-                            <label for="multi-user-biljka">Biljka</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="multi-user-predmet" type="text" class="validate">
-                            <label for="multi-user-predmet">Predmet</label>
-                        </div>
-                        <button class="btn" class="waves-effect waves-light btn-small">Pošalji</button>
-                    </form>    
-                </div>
-                <div id="game-multi-chat">
-                    <h4>Chat</h4>
-                    <div id="display-chat">
-                        <ul>
-                            
-                        </ul>
-                    </div>
-                    <div id="ctrl-chat">
-                        <form>
-                            <div class="input-field col s6">
-                                <input id="multi-user-chat" type="text" class="validate">
-                                <label for="multi-user-chat">Napši poruku...</label>
-                            </div>
-                            <button id="chat-btn" class="btn"><span class="material-icons centar">send</span></button>
-                            
-                        </form>            
-                    </div>
+                        <button id="chat-btn" class="btn"><span class="material-icons centar">send</span></button>
+                        
+                    </form>            
                 </div>
             </div>
-            
         </div>
+        
+    </div>
+
+    <!-- result -->
+
+    <div id="result-bck">
+        <div id="result">
+            <!-- <div id="close-res"><p>+</p></div> -->
+            <div><h3>Rezultat:</h3></div>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="text-align: left;">Kategorija</th>
+                            <th class="user-bck-td" id="res-user">User</th>
+                            <th class="user-bck-td">Poeni</th>
+                            <th class="bot-bck-td">Kompjuter</th>
+                            <th class="bot-bck-td">Poeni</th>
+                        </tr>
+                    </thead>
+            
+                    <tbody id="result-body">
+                        <tr>
+                            <td class="result-cat">Država</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td user-poen"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Grad</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td user-poen"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Reka</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Planina</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Životinja</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Biljka</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                        <tr>
+                            <td class="result-cat">Predmet</td>
+                            <td class="user-bck-td"></td>
+                            <td class="user-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                            <td class="bot-bck-td"></td>
+                        </tr>
+                    </tbody>
+                </table>    
+            </div>
+            <div id="score">
+                <div>
+                </div>
+                <div>
+                </div>              
+            </div>
+
+            <div>
+                <button class="btn">Nova igra!</button>
+            </div>
+                    
+        </div>
+    </div>
 
 
+    <!-- alert Winner -->
+    <div id='alert-winner-bck'>
+        <div id="alert-winner">
+            <div style="display: flex;justify-content: center;align-items: center;">
+                <img style="width:9rem" src="../img/globe.gif" alt="">    
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: space-around; align-items:center">
+                <h4 style="margin: 0;"></h4>
+                <h5 style="margin: 0;"></h5>
+                <button class="btn" class="waves-effect waves-light btn-small">OK</button>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -183,6 +277,7 @@
     });
     </script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="../js/game/multiGame.js" type="module"></script>
     <script src="../js/app.js" type="module"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js" ></script>
     <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js" ></script>

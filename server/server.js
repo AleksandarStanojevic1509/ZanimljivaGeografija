@@ -2,7 +2,7 @@ const http = require ('http')
 const express = require ('express')
 const socketio = require('socket.io')
 
-const newGame = require('./gameLogicServer.js')
+const Game = require('./gameLogicServer.js')
 
 const app = express();
 
@@ -24,78 +24,36 @@ let pickRandomLetter = () =>{
     return letters[random];
 }
 
- 
 
-let waitingPlayer = null
-let username1;
 
-io.on('connection', sock => {
+let waitingPlayer = null;
 
-    if(waitingPlayer) {
-        sock.on('username', username2 => {
-            if(username1 == username2) {
-                // Don't start game if usernames are the same
-                waitingPlayer = sock;
-                waitingPlayer.emit('message', 'Sačеkajte svog protivnika...');
-            } else {
-                // Start game if usernames are not the same
-                new newGame(waitingPlayer, sock);
-                waitingPlayer = null;
-                let letter = pickRandomLetter()
-                io.emit('letter' , letter)
+
+io.on("connection", (sock) => {
+
+    if (waitingPlayer) {
+        new Game(waitingPlayer, sock)
+        waitingPlayer = null;
+        let letter = pickRandomLetter();
+        io.emit('letter' , letter);             
            
-            }
-        })
     } else {
-        // Wait for an opponent
         waitingPlayer = sock;
-        waitingPlayer.on('username', username => {
-            username1 = username; // store waitingPlayer username
-        });
-        waitingPlayer.emit('message', 'Sačеkajte svog protivnika...')
+        waitingPlayer.emit("message", "Sačеkajte svog protivnika!");
     }
 
-    sock.on('chat', text=>{
-        io.emit('chat', text)
-    })
+    // server dobija poruke od soketa (sock.on) i salje ih svima na serveru (io.emit)
+    sock.on("message", (text) => {
+        io.emit("message", text);
+    });
+ 
 });
 
-
-
-
-
-// io.on('connection', (sock)=>{
-//     // console.log('Someone conected')
-//     // sock.emit('message', 'Hi you are connected!')
-
-//     if (waitingPlayer){
-//                new newGame(waitingPlayer, sock);
-//                 waitingPlayer = null;
-//                 let letter = pickRandomLetter()
-//                 io.emit('letter' , letter)
-
-//                 sock.on('chat', text=>{
-//                     io.emit('chat', text)
-//                 })
-//     }
-//     else{
-//         waitingPlayer = sock
-//         waitingPlayer.emit('message', 'Čeka se protivnik!')
-//     }
-
-//     sock.on('message', text=>{
-//         io.emit('message', text)
-//     })
-
-//     sock.on('turn', answ =>{
-//         console.log(answ)
-//     })
-// })
 
 server.on('error', err =>{
     console.error("Server error: ", err )
 })
 
-server.listen(8000, () =>{
+server.listen(8100, () =>{
     console.log('app started at 8800')
 })
