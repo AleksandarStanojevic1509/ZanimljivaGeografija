@@ -3,6 +3,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
   background-color: rgb(228, 228, 228);
   /* position: relative; */
@@ -83,17 +86,18 @@ body {
 #user-label{
   line-height: 2.5 !important;
 }
-#close, #close-res{
+ #close-chat{
   position: absolute;
+  display: none;
   top: 0;
   right: 0;
-  margin-top: -1rem;
+  margin-top: 0.5rem;
   margin-right: 0.3rem;
   font-size: 3rem;
   transform: rotateZ(45deg);
   color: #26a69a;
 }
-#close:hover, #close-res:hover{
+#close-chat:hover{
   cursor: pointer;
 }
 
@@ -355,6 +359,7 @@ width: 100%;
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
+  position: relative;
 }
 #display-chat{
   padding: 5px 10px;
@@ -377,7 +382,10 @@ box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.33);
 #game-multi-chat button{
   display: flex;
   justify-content: center;
-} 
+}
+#chat-icon{
+  display: none;
+}
 #ctrl-chat{
   margin-top: 1rem;
 }
@@ -655,6 +663,43 @@ footer a{
   .help:hover{
     transform: scale(1.5);
   }
+}
+
+@media only screen and (max-width: 600px) {
+  #game-multi-answers{
+    width: 80%;
+    height: unset;
+    padding: 1rem 4rem;
+    display: block;
+  }
+  #game-multi-header{
+    height: 5rem;
+  }
+  #input-chat-wraper{
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  #game-multi-chat{
+    display: none;
+    margin-bottom: 1rem;
+  }
+  #chat-icon{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #chat-icon span{
+    color: #2bbbad;
+    font-size: 3rem;
+  }
+  #chat-icon span:hover{
+   cursor: pointer;
+  }
+  #close-chat{
+    display: block;
+  }
+
 }
 
 @media only screen and (max-width: 490px) {

@@ -29,14 +29,29 @@ export let resetData = (playerForm) =>{
 export const declareWinnerAlert = (playerTotalPoints, oponentTotalPoints, oponentTitle)=>{
     if(playerTotalPoints > oponentTotalPoints){
         winnerTitle.innerHTML = `${localStorage.username} je pobedio!!!!`
-        winnerScore.innerHTML = `Tvoj rezultat je: ${playerTotalPoints}.`
+        winnerScore.innerHTML = `Tvoj rezultat je: ${playerTotalPoints} poena.`
     }
     else if(playerTotalPoints < oponentTotalPoints){
-        winnerTitle.innerHTML = oponentTitle 
-        winnerScore.innerHTML = `Njegov rezultat je: ${oponentTotalPoints}.`
+        winnerTitle.innerHTML = `${oponentTitle} je pobedio!!!!` 
+        winnerScore.innerHTML = `Njegov rezultat je: ${oponentTotalPoints} poena.`
     }
     else if(playerTotalPoints === oponentTotalPoints){
         winnerTitle.innerHTML = `Nerešeno je!!!`
         winnerScore.innerHTML = `Možete da pokušate ponovo.`
+    }  
+}
+
+export const declareWinner = (userTotalPoints, opponentTotalPoints, userTitle, opponentTitle)=>{
+    if(userTotalPoints > opponentTotalPoints){
+        winnerTitle.innerHTML = `${userTitle} je pobedio!!!!`;
+        winnerScore.innerHTML = `Tvoj rezultat je: ${userTotalPoints} poena.`;
+    }
+    else if(userTotalPoints < opponentTotalPoints){
+        winnerTitle.innerHTML = `${opponentTitle} je pobedio!!!!` 
+        winnerScore.innerHTML = `Njegov rezultat je: ${opponentTotalPoints} poena.`;
+    }
+    else if(userTotalPoints === opponentTotalPoints){
+        winnerTitle.innerHTML = `Nerešeno je!!!`;
+        winnerScore.innerHTML = `Možete da pokušate ponovo.`;
     }  
 }

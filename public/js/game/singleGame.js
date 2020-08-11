@@ -143,7 +143,6 @@ const getWinner = (playerForm) =>{
             data.docs.forEach((doc)=>{
                 possibleAnswers.push(doc.data().pojam);               
             })
-            console.log(possibleAnswers)
             switch (elem){
                 case "Država":
                     checkIfItIsTrue (possibleAnswers, dataAN, player[0], resultTable.children[0].children[1], resultTable.children[0].children[2], resultTable.children[0].children[3], resultTable.children[0].children[4]);
