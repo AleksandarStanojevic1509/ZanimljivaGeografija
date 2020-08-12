@@ -2,7 +2,7 @@
 // Modules
 import { renderHelp } from "./general/general.js";
 import { showModal, checkUser } from "./general/user.js";
-import { hallBox, sortUsers, renderTable } from "./hallOfFame/hallOfFame.js";
+import { hallBox, sortUsers, renderTable, renderBestPlayers } from "./hallOfFame/hallOfFame.js";
 
 
 // DOM
@@ -21,6 +21,8 @@ const helpModal = document.getElementById('help-modal-bck');
 //dom.hallOfFame
 const btnHall = document.querySelector ('#hall button');
 const hOfBtnOneHandler = document.getElementById('hall-of-fame-terms');
+const hOfBtnTwoHandler = document.getElementById('hall-of-fame-score');
+
 const hOfBox = document.getElementById('hall-modal-bck');
 const hOfTable = document.querySelector ('table');
 
@@ -72,13 +74,37 @@ closeAlertHandler.addEventListener('click', ()=>{
 // })
 
 // close modal
-// btnHall.addEventListener('click', ()=>{
-//     hOfBox.style.display = 'none';
-//     arrayOfUsers = []    
-// })
+btnHall.addEventListener('click', ()=>{
+    hOfBox.style.display = 'none';
+    
+    // arrayOfUsers = []    
+})
 
 
-// 
+// hallOfFame.best score
+
+hOfBtnTwoHandler.addEventListener('click', (event) =>{
+    hallBox(hOfBox);
+    let arrayOfBestPlayers = [];
+    db.collection('rezultati')
+    .orderBy('broj_poena', 'desc')
+    .limit(5)
+    .get()
+    .then(snapshot => {
+        snapshot.docs.forEach(doc => {
+            arrayOfBestPlayers.push(doc.data());
+            // console.log();
+        });
+        return arrayOfBestPlayers
+    })
+    .then(data=>{
+        // alert(data[0].username)
+        hOfTable.innerHTML = renderBestPlayers(data);
+
+    })
+})
+ 
+
 
 
 // pravila igre

@@ -55,5 +55,43 @@ export const renderTable = (sortedArray) =>{
                 </tbody>
                 `
 }
-            
+
+
+export const renderBestPlayers = (arrayScores) =>{
+    return `<thead>
+                <tr>
+                    <th>No:</th>
+                    <th>Username</th>
+                    <th>Broj poena</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>1.</td>
+                <td>${arrayScores[0].username}</td>
+                <td>${arrayScores[0].broj_poena}</td>
+                </tr>
+                <tr>
+                <td>2.</td>
+                <td>${arrayScores[1].username}</td>
+                <td>${arrayScores[1].broj_poena}</td>
+                </tr>
+                <tr>
+                <td>3.</td>
+                <td>${arrayScores[2].username}</td>
+                <td>${arrayScores[2].broj_poena}</td>
+                </tr>
+                <tr>
+                <td>4.</td>
+                <td>${arrayScores[3].username}</td>
+                <td>${arrayScores[3].broj_poena}</td>
+                </tr>
+                <tr>
+                <td>5.</td>
+                <td>${arrayScores[4].username}</td>
+                <td>${arrayScores[4].broj_poena}</td>
+                </tr>
+                </tbody>
+                `
+}
 

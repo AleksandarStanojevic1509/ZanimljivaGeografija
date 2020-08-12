@@ -1,6 +1,8 @@
 // module
 import { collectPlayerAnswers, declareWinner } from "./game.js";
 import { checkFirstLetter } from "../general/general.js";
+import { addScore } from "../general/addScore.js";
+
 
 //DOM
 const multiGameHandler = document.querySelectorAll('.play-game-multi');
@@ -38,6 +40,7 @@ const writeEvent = (text) =>{
 const multiPlayerTimer = () => {
     gameTime = setInterval( () => {
         if(countDown === 0){
+            window.scrollTo(0, 0);
             const formAnswers = document.querySelector('#game-multi-input form');
 
             let playerAnswers = collectPlayerAnswers(formAnswers);
@@ -195,9 +198,17 @@ const renderResult = (data) =>{
         console.log(scores)
         if(localStorage.getItem('username') === scores[0].name){
             console.log('rezultati za ' + localStorage.getItem('username') + ' su ' + scores[0].points)
+            new addScore(localStorage.getItem('username'), scores[0].points)
+            // console(po)
+            // po.stampaj()
         }
         else{
             console.log('rezultati za ' + localStorage.getItem('username') + ' su ' + scores[1].points)
+            new addScore(localStorage.getItem('username'), scores[1].points)
+
+            // po.stampaj()
+
+
         }
         document.getElementById('result-bck').style.display = 'grid';
 

@@ -15,9 +15,6 @@
 </head>
 <body>
     
-    
- 
-
     <!-- game rules -->
     <div id='help-modal-bck'>        
     </div>
@@ -57,7 +54,6 @@
     </div>
 
     <!-- HEADER -->
-
     <span class="material-icons show-help-tooltip help" data-tooltip="PRAVILA IGRE">help</span>
 
     <div>
@@ -85,10 +81,7 @@
             <li style="text-align: center;"><a><div class="is-user" ></div></a></li>
         </ul>
     </div>
-            
-
-   
-
+  
     <form id="add-term-form">
         <!-- <div id="close"><p>+</p></div> -->
         <div class="input-field col s6">
@@ -114,41 +107,28 @@
         <!-- <input id='submit' type="submit" value="Add to DB"> -->
     </form>
     
-   
-    
+    <footer>
+        <div>
+            <h6>© Copyright ©2020 All rights reserved | This app is made by <a href="https://aleksandar-portfolio.web.app/">Aleksandar Stanojevic</a></h6>
+            <a href="https://itbootcamp.rs/" target="_blank"><img style="width: 9%;" src="../img/itbootcamp.png" alt=""></a>
+        </div>
+    </footer>
 
-
-
-
-<footer>
-    <div>
-        <h6>© Copyright ©2020 All rights reserved | This app is made by <a href="https://aleksandar-portfolio.web.app/">Aleksandar Stanojevic</a></h6>
-        <a href="https://itbootcamp.rs/" target="_blank"><img style="width: 9%;" src="../img/itbootcamp.png" alt=""></a>
-    </div>
-</footer>
-
-
-
-
-
-
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        let elems = document.querySelectorAll('.sidenav');
-        let instances = M.Sidenav.init(elems, {
-            edge: 'left',
-            draggable: true,
-            inDuration: 250,
-            outDuration: 200,
-            onOpenStart: null,
-            onOpenEnd: null,
-            onCloseStart: null,
-            onCloseEnd: null,
-            preventScrolling: true
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let elems = document.querySelectorAll('.sidenav');
+            let instances = M.Sidenav.init(elems, {
+                edge: 'left',
+                draggable: true,
+                inDuration: 250,
+                outDuration: 200,
+                onOpenStart: null,
+                onOpenEnd: null,
+                onCloseStart: null,
+                onCloseEnd: null,
+                preventScrolling: true
+            });
         });
-    });
     </script>
     <script src="../js/app.js" type="module"></script>
     <script src="../js/general/addTerm.js" type="module"></script>
