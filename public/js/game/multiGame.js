@@ -1,6 +1,6 @@
 // module
 import { collectPlayerAnswers, declareWinner } from "./game.js";
-import { checkFirstLetter } from "../general/general.js";
+import { checkFirstLetter, renderHelp } from "../general/general.js";
 import { addScore } from "../general/addScore.js";
 
 
@@ -14,6 +14,10 @@ const userNameTable = document.getElementById('username-table');
 const opponentNameTable = document.getElementById('opponent-table');
 const alertWinnerModal = document.getElementById('alert-winner-bck');
 const resetGame = document.querySelector('#result button');
+
+//dom.help
+const helpHandler = document.querySelectorAll('.help');
+const helpModal = document.getElementById('help-modal-bck');
 
 
 // Variables
@@ -279,4 +283,19 @@ closeChatHandler.addEventListener('click', ()=>{
     chatHandler.style.display = 'flex';
     document.getElementById('game-multi-chat').style.display = 'none';
 
+})
+
+// pravila igre
+helpHandler.forEach(elem =>{
+    elem.addEventListener('click', ()=>{
+        // console.log(renderHelp())
+        helpModal.style.display = 'block';
+        helpModal.innerHTML = renderHelp();
+    })
+})
+
+helpModal.addEventListener('click', (event)=>{
+    if (event.target.tagName == 'BUTTON'){
+    helpModal.style.display = 'none';
+    }
 })

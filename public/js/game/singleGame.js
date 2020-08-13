@@ -1,6 +1,6 @@
 // modules
 import {collectPlayerAnswers, declareWinnerAlert, pickRandomLetter, resetData} from './game.js'
-import { alertBox } from '../general/general.js';
+import { alertBox, renderHelp } from '../general/general.js';
 
 // DOM
 const singleGameSubmitBtn = document.querySelector('#game-answers button');
@@ -11,6 +11,10 @@ const resultBackgound = document.getElementById('result-bck');
 const alertWinnerModal = document.querySelector('#alert-winner-bck');
 // const closeResultHandler = document.getElementById('close-res');
 const resetGame = document.querySelector('#result button');
+
+//dom.help
+const helpHandler = document.querySelectorAll('.help');
+const helpModal = document.getElementById('help-modal-bck');
 
 
 
@@ -236,7 +240,20 @@ resetGame.addEventListener('click', ()=>{
 
 
 
+// pravila igre
+helpHandler.forEach(elem =>{
+    elem.addEventListener('click', ()=>{
+        // console.log(renderHelp())
+        helpModal.style.display = 'block';
+        helpModal.innerHTML = renderHelp();
+    })
+})
 
+helpModal.addEventListener('click', (event)=>{
+    if (event.target.tagName == 'BUTTON'){
+    helpModal.style.display = 'none';
+    }
+})
 
 
 

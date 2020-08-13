@@ -1,5 +1,5 @@
 
-import { fixInputValue, alertBox, checkFirstLetter } from "./general.js";
+import { fixInputValue, alertBox, checkFirstLetter, renderHelp } from "./general.js";
 
 //dom.add term to DB
 const inputText = document.getElementById('add-new-term');
@@ -10,6 +10,10 @@ const alertModal = document.querySelector('#alert-modal-bck');
 const alertMsg = document.querySelector('#alert-modal-bck h5');
 const alertTitle = document.querySelector('#alert-modal-bck h3');
 const btnAlertClose = document.querySelector ('#alert button');
+
+//dom.help
+const helpHandler = document.querySelectorAll('.help');
+const helpModal = document.getElementById('help-modal-bck');
 
 
 const addTerm = (fixedTerm, firstLetter, category, inputCategory, alertModal, alertMsg, alertTitle) =>{
@@ -64,4 +68,19 @@ addTermHandler.addEventListener('click', (event)=>{
     
     addTermForm.reset();
 
+})
+
+// pravila igre
+helpHandler.forEach(elem =>{
+    elem.addEventListener('click', ()=>{
+        // console.log(renderHelp())
+        helpModal.style.display = 'block';
+        helpModal.innerHTML = renderHelp();
+    })
+})
+
+helpModal.addEventListener('click', (event)=>{
+    if (event.target.tagName == 'BUTTON'){
+    helpModal.style.display = 'none';
+    }
 })
