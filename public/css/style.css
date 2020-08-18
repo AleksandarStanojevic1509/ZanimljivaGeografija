@@ -249,7 +249,8 @@ nav>div{
 
 }
 #gif-bck{
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
+  padding-top: 10rem;
   display: flex;
   justify-content: center;
 }

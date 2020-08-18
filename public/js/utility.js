@@ -38,12 +38,12 @@ export const FirstLetter = (fixedTerm) =>{
         .then(querySnapshot =>{
             if (querySnapshot.size > 0){
                 querySnapshot.docs.forEach((doc) => {
-                    console.log('Pojam vec postoji u bazi podataka!!')
+                    // console.log('Pojam vec postoji u bazi podataka!!')
                 })
             }
             else{
                 addTerm(cat, val);
-                console.log('Uspesno dodat pojam!!')
+                // console.log('Uspesno dodat pojam!!')
             }
         })
     }    
@@ -52,7 +52,7 @@ export const FirstLetter = (fixedTerm) =>{
         let wordArray = [];
         let words =  ""; // *** Promeni niz ***
         wordArray = words.split(' ');
-        console.log(wordArray)
+        // console.log(wordArray)
         wordArray.forEach(word => {
             checkTerm("Biljka", word); // *** Ukucaj ručno kategoriju ****  
         })
