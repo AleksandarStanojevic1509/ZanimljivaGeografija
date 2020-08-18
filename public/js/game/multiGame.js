@@ -202,11 +202,9 @@ const renderResult = (data) =>{
         ]
         console.log(scores)
         if(localStorage.getItem('username') === scores[0].name){
-            // console.log('rezultati za ' + localStorage.getItem('username') + ' su ' + scores[0].points)
             new addScore(localStorage.getItem('username'), scores[0].points);
         }
         else{
-            // console.log('rezultati za ' + localStorage.getItem('username') + ' su ' + scores[1].points)
             new addScore(localStorage.getItem('username'), scores[1].points);
         }
         document.getElementById('result-bck').style.display = 'grid';

@@ -24,10 +24,7 @@ let pickRandomLetter = () =>{
     return letters[random];
 }
 
-
-
 let waitingPlayer = null;
-
 
 io.on("connection", (sock) => {
 
