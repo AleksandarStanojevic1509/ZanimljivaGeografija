@@ -52,7 +52,7 @@ export const FirstLetter = (fixedTerm) =>{
         let wordArray = [];
         let words =  ""; // *** Promeni niz ***
         wordArray = words.split(' ');
-        console.log(wordArray)
+        // console.log(wordArray)
         wordArray.forEach(word => {
             checkTerm("Biljka", word); // *** Ukucaj ručno kategoriju ****  
         })

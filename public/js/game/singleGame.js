@@ -159,10 +159,10 @@ const checkPlayerAnswer = (category, answer) =>{
         .get()
         .then((querySnapshot) => {
             if (querySnapshot.size > 0) {
-                resolve(answer)
+                resolve(answer);
             }            
             else{
-                resolve('')
+                resolve('');
             }
         })
     })
