@@ -1,6 +1,7 @@
 // modules
-import {collectPlayerAnswers, declareWinnerAlert, pickRandomLetter, resetData} from './game.js'
+import {collectPlayerAnswers, declareWinnerAlert, pickRandomLetter, resetData } from './game.js'
 import { alertBox, renderHelp } from '../general/general.js';
+
 
 // DOM
 const singleGameSubmitBtn = document.querySelector('#game-answers button');
@@ -21,8 +22,9 @@ const helpModal = document.getElementById('help-modal-bck');
 // Variables
 let gameTime;
 let countDown = 61;
-let playerTotalPoints = 0;
-let botTotalPoints = 0;
+let userPoints = 0;
+let opponentPoints = 0;
+
 const category = ["Država", "Grad", "Reka", "Planina", "Životinja", "Biljka", "Predmet"];
 
 
@@ -33,12 +35,12 @@ const singlPlayerTimer = () => {
         if(countDown === 0){
             // submituj formu i proglasi pobednika
 
-            getWinner(playerForm);
+            getWinner();
             resultBackgound.style.display = 'block';
             // reset countDown Time 
             clearInterval(gameTime);
             countDown = 61;
-            resetData(userAnswersBox, playerForm);
+            // resetData(userAnswersBox, playerForm);
         }
     else {
         countDown--;
@@ -58,44 +60,47 @@ const singlPlayerTimer = () => {
 }, 1000);
 }
 
+
 // function.add points
-const checkIfItIsTrue = (answers, bot, player, plTerm, plPoints, botTerm, botPoints)=>{   
-    if(answers.includes(bot) && answers.includes(player)){
-        if(bot === player ){
-            plTerm.innerHTML = `${player} `;
-            botTerm.innerHTML = `${bot}`;
+
+
+const addPoints = (user, opponent, plTerm, plPoints, botTerm, botPoints) =>{
+    if(user !== '' && opponent !== ''){
+        if(user === opponent ){
+            plTerm.innerHTML = `${user} `;
+            botTerm.innerHTML = `${opponent}`;
             plPoints.innerHTML = `+5`;
             botPoints.innerHTML = `+5`;
-            playerTotalPoints += 5;
-            botTotalPoints += 5;
+            userPoints += 5;
+            opponentPoints += 5;
             return;
         }
         else {
-            plTerm.innerHTML = `${player} `;
-            botTerm.innerHTML = `${bot}`;
+            plTerm.innerHTML = `${user} `;
+            botTerm.innerHTML = `${opponent}`;
             plPoints.innerHTML = `+10`;
             botPoints.innerHTML = `+10`;
-            playerTotalPoints += 10;
-            botTotalPoints += 10;
+            userPoints += 10;
+            opponentPoints += 10;
             return;
         }
     }
-    if(answers.includes(bot)){
+    if(user == '' && opponent !== ''){
         plTerm.innerHTML = `<span style="color:tomato; font-weight:500">X</span>`;
-        botTerm.innerHTML = `${bot}`;
+        botTerm.innerHTML = `${opponent}`;
         plPoints.innerHTML = `+0`;
         botPoints.innerHTML = `+15`;
-        playerTotalPoints += 0;
-        botTotalPoints += 15;
+        userPoints += 0;
+        opponentPoints += 15;
         return;
     }
-    if (answers.includes(player)){
-        plTerm.innerHTML = `${player}`
+    if (user !== '' && opponent == ''){
+        plTerm.innerHTML = `${user}`
         botTerm.innerHTML = `<span style="color:tomato; font-weight:500">X</span>`;
         plPoints.innerHTML = `+15`;
         botPoints.innerHTML = `+0`;
-        playerTotalPoints += 15;
-        botTotalPoints += 0;
+        userPoints += 15;
+        opponentPoints += 0;
         return;
     }
     else {
@@ -103,10 +108,11 @@ const checkIfItIsTrue = (answers, bot, player, plTerm, plPoints, botTerm, botPoi
         botTerm.innerHTML = `<span style="color:tomato; font-weight:500">X</span>`;
         plPoints.innerHTML = `+0`;
         botPoints.innerHTML = `+0`;
-        playerTotalPoints += 0;
-        botTotalPoints += 0;
+        userPoints += 0;
+        opponentPoints += 0;
     }
 }
+
 
 // function.computer level
 const finalAnswer = (chance, term) =>{
@@ -118,73 +124,84 @@ const finalAnswer = (chance, term) =>{
     }
 }
 
-// function.henerate computer answers and check answers
-const getWinner = (playerForm) =>{
-    let answer;
-    let player = collectPlayerAnswers(playerForm)
-    let possibleAnswers = [];
-    category.forEach((elem)=>{
-        db.collection("pojmovi")
-        .where("pocetnoSlovo", "==", `${localStorage.randomLetter}`)
-        .where("kategorija", "==", elem)
+// fuction.generate copmuter answers
+const generateBotAnswer = (category, firstLetter) =>{
+    let singleAnswer = new Promise ((resolve, reject)=>{
+        let answer;
+        let key = db.collection('pojmovi').doc().id;
+        // console.log(key)
+        db.collection('pojmovi')
+        .where('kategorija', '==', category)
+        .where('pocetnoSlovo', '==', firstLetter)
+        .where(firebase.firestore.FieldPath.documentId(), '>=', key)
+        .limit(1)
         .get()
         .then(snapshot => {
             const randomIndex = Math.floor(Math.random() * snapshot.docs.length);
             if (snapshot.docs[randomIndex] === undefined){
-                return  answer = '';
+                answer = '';
             }
             else {
                 answer = finalAnswer(Math.random(), snapshot.docs[randomIndex].data().pojam);
             }           
-            return answer;
+            resolve(answer);
         })
-        .then( dataAN =>{
-            db.collection("pojmovi")
-            .where("pocetnoSlovo", "==", `${localStorage.randomLetter}`)
-            .where("kategorija", "==", elem)
-            .get()
-            .then((data) => {
-            data.docs.forEach((doc)=>{
-                possibleAnswers.push(doc.data().pojam);               
-            })
-            switch (elem){
-                case "Država":
-                    checkIfItIsTrue (possibleAnswers, dataAN, player[0], resultTable.children[0].children[1], resultTable.children[0].children[2], resultTable.children[0].children[3], resultTable.children[0].children[4]);
-                    break;
-                case "Grad":
-                    checkIfItIsTrue (possibleAnswers, dataAN, player[1], resultTable.children[1].children[1], resultTable.children[1].children[2], resultTable.children[1].children[3], resultTable.children[1].children[4]);
-                    break;
-                case "Reka":
-                    checkIfItIsTrue (possibleAnswers, dataAN, player[2], resultTable.children[2].children[1], resultTable.children[2].children[2], resultTable.children[2].children[3], resultTable.children[2].children[4]);
-                    break;
-                case "Planina":
-                    checkIfItIsTrue (possibleAnswers, dataAN, player[3], resultTable.children[3].children[1], resultTable.children[3].children[2], resultTable.children[3].children[3], resultTable.children[3].children[4]);
-                    break;
-                case "Životinja":
-                    checkIfItIsTrue (possibleAnswers, dataAN, player[4], resultTable.children[4].children[1], resultTable.children[4].children[2], resultTable.children[4].children[3], resultTable.children[4].children[4]);
-                    break;
-                case "Biljka":
-                    checkIfItIsTrue (possibleAnswers, dataAN, player[5], resultTable.children[5].children[1], resultTable.children[5].children[2], resultTable.children[5].children[3], resultTable.children[5].children[4]);
-                    break;
-                case "Predmet":
-                    checkIfItIsTrue (possibleAnswers, dataAN, player[6], resultTable.children[6].children[1], resultTable.children[6].children[2], resultTable.children[6].children[3], resultTable.children[6].children[4]);
-                    break;
-                }
-                finalScore.children[0].innerHTML = `<p>${localStorage.username}: <span>${playerTotalPoints}</span></p>`;
-                finalScore.children[1].innerHTML = `<p>Kompjuter: <span>${botTotalPoints}</span></p>`;
-                if(elem === "Predmet"){
-                    declareWinnerAlert (playerTotalPoints, botTotalPoints, `Kompjuter je pobedio!!!!`)
-                }
-            })
-            playerTotalPoints = 0;
-            botTotalPoints = 0;
-            possibleAnswers = []
-            document.querySelector('#alert-winner-bck').style.display = 'grid'
+    }) 
+    return singleAnswer;
+}
+
+// function.check does player answers exist in db 
+const checkPlayerAnswer = (category, answer) =>{
+    return new Promise((resolve, reject)=>{
+        db.collection("pojmovi")
+        .where("kategorija", "==", `${category}`)
+        .where("pojam", "==", `${answer}`)
+        .get()
+        .then((querySnapshot) => {
+            if (querySnapshot.size > 0) {
+                resolve(answer)
+            }            
+            else{
+                resolve('')
+            }
+        })
     })
-    .catch((error) => {
-        alertBox(alertModal, alertMsg, alertTitle, 'Žao nam je imamo previše zahteva. Pokušajte kasnije!', 'Oops!!!');
-    });
-})
+}
+
+
+// function.get winner
+const getWinner = async()=>{
+
+    let playerAnswers = collectPlayerAnswers(playerForm);
+
+    let corectAnswers = await Promise.all([checkPlayerAnswer('Država', playerAnswers[0]),
+                                            checkPlayerAnswer('Grad', playerAnswers[1]),
+                                            checkPlayerAnswer('Reka', playerAnswers[2]),
+                                            checkPlayerAnswer('Planina', playerAnswers[3]),
+                                            checkPlayerAnswer('Životinja', playerAnswers[4]),
+                                            checkPlayerAnswer('Biljka', playerAnswers[5]),
+                                            checkPlayerAnswer('Predmet', playerAnswers[6]),
+                                    ]);
+
+    let botAnswers = await Promise.all([generateBotAnswer('Država', localStorage.randomLetter), 
+                                        generateBotAnswer('Grad', localStorage.randomLetter),
+                                        generateBotAnswer('Reka', localStorage.randomLetter),
+                                        generateBotAnswer('Planina', localStorage.randomLetter),
+                                        generateBotAnswer('Životinja', localStorage.randomLetter),
+                                        generateBotAnswer('Biljka', localStorage.randomLetter),
+                                        generateBotAnswer('Predmet', localStorage.randomLetter),
+                                    ]);                         
+
+    for(let i = 0; i < playerAnswers.length; i++ ){
+        addPoints(corectAnswers[i], botAnswers[i], resultTable.children[i].children[1], resultTable.children[i].children[2], resultTable.children[i].children[3], resultTable.children[i].children[4])
+    }
+
+    finalScore.children[0].innerHTML = `<p>${localStorage.username}: <span>${userPoints}</span></p>`;
+    finalScore.children[1].innerHTML = `<p>Kompjuter: <span>${opponentPoints}</span></p>`;        
+    declareWinnerAlert (userPoints, opponentPoints , `Kompjuter`);
+    userPoints = 0;
+    opponentPoints = 0;
+    document.querySelector('#alert-winner-bck').style.display = 'grid';
 }
 
 
@@ -202,13 +219,12 @@ window.addEventListener('load', ()=>{
 //submit answers
 singleGameSubmitBtn.addEventListener('click', (event)=>{
     event.preventDefault();   
-
-    getWinner (playerForm);
-    resultBackgound.style.display = 'block';  
- 
-    resetData(playerForm);
     clearInterval(gameTime);
     countDown = 61; 
+
+    getWinner ();
+    resultBackgound.style.display = 'block';  
+ 
 })
 
 
@@ -228,17 +244,8 @@ alertWinnerModal.addEventListener('click', event => {
 
 // reset game
 resetGame.addEventListener('click', ()=>{
-    resultBackgound.style.display = 'none'
-    document.querySelector('.time-to-end').innerHTML = '';
-
-    let letter = pickRandomLetter();
-    localStorage.setItem('randomLetter', `${letter}`);
-    document.getElementById('random-letter').innerHTML  = letter;  
-    // countDown Time     
-    singlPlayerTimer();
+    location.reload();
 })   
-
-
 
 // pravila igre
 helpHandler.forEach(elem =>{

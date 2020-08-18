@@ -74,35 +74,35 @@ closeAlertHandler.addEventListener('click', ()=>{
 // })
 
 // close modal
-btnHall.addEventListener('click', ()=>{
-    hOfBox.style.display = 'none';
+// btnHall.addEventListener('click', ()=>{
+//     hOfBox.style.display = 'none';
     
-    // arrayOfUsers = []    
-})
+//     // arrayOfUsers = []    
+// })
 
 
 // hallOfFame.best score
 
-hOfBtnTwoHandler.addEventListener('click', (event) =>{
-    hallBox(hOfBox);
-    let arrayOfBestPlayers = [];
-    db.collection('rezultati')
-    .orderBy('broj_poena', 'desc')
-    .limit(5)
-    .get()
-    .then(snapshot => {
-        snapshot.docs.forEach(doc => {
-            arrayOfBestPlayers.push(doc.data());
-            // console.log();
-        });
-        return arrayOfBestPlayers
-    })
-    .then(data=>{
-        // alert(data[0].username)
-        hOfTable.innerHTML = renderBestPlayers(data);
+// hOfBtnTwoHandler.addEventListener('click', (event) =>{
+//     hallBox(hOfBox);
+//     let arrayOfBestPlayers = [];
+//     db.collection('rezultati')
+//     .orderBy('broj_poena', 'desc')
+//     .limit(5)
+//     .get()
+//     .then(snapshot => {
+//         snapshot.docs.forEach(doc => {
+//             arrayOfBestPlayers.push(doc.data());
+//             // console.log();
+//         });
+//         return arrayOfBestPlayers
+//     })
+//     .then(data=>{
+//         // alert(data[0].username)
+//         hOfTable.innerHTML = renderBestPlayers(data);
 
-    })
-})
+//     })
+// })
  
 
 

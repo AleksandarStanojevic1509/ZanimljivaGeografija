@@ -43,12 +43,12 @@ export const declareWinnerAlert = (playerTotalPoints, oponentTotalPoints, oponen
 
 export const declareWinner = (userTotalPoints, opponentTotalPoints, userTitle, opponentTitle)=>{
     if(userTotalPoints > opponentTotalPoints){
-        winnerTitle.innerHTML = `${userTitle} je pobedio!!!!`;
-        winnerScore.innerHTML = `Tvoj rezultat je: ${userTotalPoints} poena.`;
+        winnerTitle.innerHTML = `${userTitle} je pobednik!!!!`;
+        winnerScore.innerHTML = `Osvojio je: ${userTotalPoints} poena.`;
     }
     else if(userTotalPoints < opponentTotalPoints){
-        winnerTitle.innerHTML = `${opponentTitle} je pobedio!!!!` 
-        winnerScore.innerHTML = `Njegov rezultat je: ${opponentTotalPoints} poena.`;
+        winnerTitle.innerHTML = `${opponentTitle} je pobednik!!!!` 
+        winnerScore.innerHTML = `Osvojio je: ${opponentTotalPoints} poena.`;
     }
     else if(userTotalPoints === opponentTotalPoints){
         winnerTitle.innerHTML = `Nerešeno je!!!`;

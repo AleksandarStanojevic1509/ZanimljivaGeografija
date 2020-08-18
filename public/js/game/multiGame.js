@@ -149,6 +149,7 @@ const addPoints = (user, opponent, plTerm, plPoints, botTerm, botPoints) =>{
     }
 }
 
+
 // const checkOpponent = (local, opp, usr) =>{
 //     let opponent;
 //     if(local === usr){
@@ -193,7 +194,7 @@ const renderResult = (data) =>{
         }
         alertWinnerModal.style.display = 'grid';
         userNameTable.innerHTML = data[0].answ.name;
-        opponentNameTable.innerHTML = data[1].answ.name;;
+        opponentNameTable.innerHTML = data[1].answ.name;
         })    
         let scores = [
             {name:data[0].answ.name, points:userPoints},
@@ -201,18 +202,12 @@ const renderResult = (data) =>{
         ]
         console.log(scores)
         if(localStorage.getItem('username') === scores[0].name){
-            console.log('rezultati za ' + localStorage.getItem('username') + ' su ' + scores[0].points)
-            new addScore(localStorage.getItem('username'), scores[0].points)
-            // console(po)
-            // po.stampaj()
+            // console.log('rezultati za ' + localStorage.getItem('username') + ' su ' + scores[0].points)
+            new addScore(localStorage.getItem('username'), scores[0].points);
         }
         else{
-            console.log('rezultati za ' + localStorage.getItem('username') + ' su ' + scores[1].points)
-            new addScore(localStorage.getItem('username'), scores[1].points)
-
-            // po.stampaj()
-
-
+            // console.log('rezultati za ' + localStorage.getItem('username') + ' su ' + scores[1].points)
+            new addScore(localStorage.getItem('username'), scores[1].points);
         }
         document.getElementById('result-bck').style.display = 'grid';
 
@@ -255,7 +250,6 @@ multiAnswersForm.addEventListener('click', (event)=>{
 })
 
 
-
 // alert with winner and socore
 alertWinnerModal.addEventListener('click', event => {
     event.stopPropagation();
@@ -288,7 +282,6 @@ closeChatHandler.addEventListener('click', ()=>{
 // pravila igre
 helpHandler.forEach(elem =>{
     elem.addEventListener('click', ()=>{
-        // console.log(renderHelp())
         helpModal.style.display = 'block';
         helpModal.innerHTML = renderHelp();
     })
