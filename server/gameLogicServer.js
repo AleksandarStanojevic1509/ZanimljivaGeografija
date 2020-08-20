@@ -49,6 +49,7 @@ class Game {
             this.turns[playerIndex] = turn;
             this.sendMsgToPlayer(playerIndex, `Odgovori su poslati!`);
             this.sendAnswersToClient()
+            this.checkGameOver()
         }
         else{
             this.sendMsgToPlayer(playerIndex, `Već su poslati rezultati, sačekajte novu partiju!`);            
@@ -74,9 +75,9 @@ class Game {
 
 
     checkGameOver(){
-        const turns = this.turns
+        const turns = this.turns;
         if(turns[0]&& turns[1]){
-            this.sendMsgToAll(`Kraj igre ${turns.join(' : ')}`)
+            // this.sendMsgToAll(`Kraj igre ${turns.join(' : ')}`)
             this.turns = [null, null]
             this.sendMsgToAll(`Nova partija!`)
         }

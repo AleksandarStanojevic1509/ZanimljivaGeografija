@@ -43,6 +43,11 @@ io.on("connection", (sock) => {
     sock.on("message", (text) => {
         io.emit("message", text);
     });
+
+    sock.on('disconnect', ()=>{
+        io.emit('oponentDisconnected', "Protivnik je napustio igru!");      
+        waitingPlayer = null;
+    })
  
 });
 

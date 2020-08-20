@@ -14,6 +14,8 @@ const userNameTable = document.getElementById('username-table');
 const opponentNameTable = document.getElementById('opponent-table');
 const alertWinnerModal = document.getElementById('alert-winner-bck');
 const resetGame = document.querySelector('#result button');
+const playerForm = document.querySelector('#game-answers form');
+
 
 //dom.help
 const helpHandler = document.querySelectorAll('.help');
@@ -212,6 +214,13 @@ const renderResult = (data) =>{
 }
 
 
+const ifDisconnected = (text) =>{
+    writeEvent(text);
+    document.querySelector('#alert-disconnect-bck').style.display = 'block';
+
+
+}
+
 
 // Listeners
 // listeners.socket
@@ -223,6 +232,7 @@ sock.on('answersForRender', renderResult);
 sock.on('letter',  (letter) =>{
     document.getElementById('random-letter-multi').innerHTML  = letter;
 })
+sock.on('oponentDisconnected', ifDisconnected)
 
 // listeners.chat
 chatHanler.addEventListener('click', (event)=>{

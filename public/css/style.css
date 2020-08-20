@@ -103,7 +103,7 @@ body {
 
 /* alert */
 
-#alert-modal-bck, #alert-winner-bck{
+#alert-modal-bck, #alert-winner-bck, #alert-disconnect-bck{
   background-color:  #47cec1;
   position: absolute;
   top: 0;
@@ -142,6 +142,36 @@ body {
 #alert img, #alert-winner img {
   width: 10rem;
   padding: 1rem 0;
+}
+#alert-disconnect{
+  animation: bounceInDown; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 1s; /* don't forget to set a duration! */
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  background-color: rgb(255, 255, 255) !important;
+  width: 28rem;
+  height: 10rem;
+  margin: 0 auto;
+  z-index: 10;
+  margin-top: 8.5rem;
+  -webkit-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  -moz-box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  box-shadow: 10px 10px 11px -8px rgba(0,0,0,0.45);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+#alert-disconnect h6{
+  margin-left: 2rem;
+  margin-right: 2rem;
+  text-align: center;
+}
+#alert-disconnect a{
+  color:  #26a69a;
 }
 
 button{
@@ -383,6 +413,7 @@ box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.33);
 #game-multi-chat button{
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 #chat-icon{
   display: none;

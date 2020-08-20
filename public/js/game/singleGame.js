@@ -35,7 +35,7 @@ const singlPlayerTimer = () => {
         if(countDown === 0){
             // submituj formu i proglasi pobednika
 
-            getWinner();
+            getWinnerSingleGame(playerForm);
             resultBackgound.style.display = 'block';
             // reset countDown Time 
             clearInterval(gameTime);
@@ -170,9 +170,9 @@ const checkPlayerAnswer = (category, answer) =>{
 
 
 // function.get winner
-const getWinner = async()=>{
+const getWinnerSingleGame = async(userAnsw)=>{
 
-    let playerAnswers = collectPlayerAnswers(playerForm);
+    let playerAnswers = collectPlayerAnswers(userAnsw);
 
     let corectAnswers = await Promise.all([checkPlayerAnswer('Država', playerAnswers[0]),
                                             checkPlayerAnswer('Grad', playerAnswers[1]),
@@ -222,7 +222,7 @@ singleGameSubmitBtn.addEventListener('click', (event)=>{
     clearInterval(gameTime);
     countDown = 61; 
 
-    getWinner ();
+    getWinnerSingleGame(playerForm);
     resultBackgound.style.display = 'block';  
  
 })

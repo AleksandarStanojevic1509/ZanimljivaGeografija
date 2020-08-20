@@ -51,10 +51,11 @@ const addTerm = (fixedTerm, firstLetter, category, inputCategory, alertModal, al
 addTermHandler.addEventListener('click', (event)=>{
     event.preventDefault();
     
+    if (inputText.value === '' || inputCategory.value === '' || inputText.value === ' ' || inputCategory.value === ' ') return ;
+
     const fixedTerm = fixInputValue (inputText); 
     const category = inputCategory.value;
     
-    if (fixedTerm.value === '' && category === '' && fixedTerm.value === ' ' && category === ' ') return ;
 
     if (localStorage.getItem('username') === null){
         alertBox(alertModal, alertMsg, alertTitle, 'Unesite korisničko ime!!!', 'Oops...');
