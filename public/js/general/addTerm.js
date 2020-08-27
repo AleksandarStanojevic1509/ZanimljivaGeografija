@@ -16,29 +16,58 @@ const helpHandler = document.querySelectorAll('.help');
 const helpModal = document.getElementById('help-modal-bck');
 
 
-const addTerm = (fixedTerm, firstLetter, category, inputCategory, alertModal, alertMsg, alertTitle) =>{
+const addTerm = (fixedTerm, firstLetter, category, alertModal, alertMsg, alertTitle) =>{
 
     db.collection("pojmovi")
     .where("pojam", "==", `${fixedTerm}`)
-    .where("kategorija", "==", `${inputCategory.value}`)
+    .where("kategorija", "==", `${category}`)
     .where("pocetnoSlovo","==", `${firstLetter}`)
     .get()
     .then((querySnapshot) => {
         if (querySnapshot.size > 0) {
             querySnapshot.docs.forEach((doc) => {
             alertBox(alertModal, alertMsg, alertTitle, 'Termin već postoji!!!', 'Oops...');
-        }) 
-    }
-    else {
+            }) 
+        }
+        else {
+            // console.log('nema u kolekciji ')
+            // db.collection("predlozi")
+            // .where("pojam", "==", `${fixedTerm}`)
+            // .where("kategorija", "==", `${category}`)
+            // .where("pocetnoSlovo","==", `${firstLetter}`)
+            // .get()
+            // .then((querySnapshot) => {
+            //     if (querySnapshot.size > 0) {
+            //         querySnapshot.docs.forEach((doc) => {
+            //             console.log(doc)
+            //         alertBox(alertModal, alertMsg, alertTitle, 'Termin je već predložen!!!', 'Oops...');
+            //         console.log('ima u kolekciji predlozrni')
+            //         }) 
+            //     }
+            //     else {        
+            //         console.log('tada')
+            //         const date = new Date();
+            //         db.collection('predlozi').doc().set({
+            //             kategorija: category,
+            //             korisnik: localStorage.getItem('username'),
+            //             pocetnoSlovo: firstLetter,
+            //             pojam:fixedTerm,
+            //             vreme:firebase.firestore.Timestamp.fromDate(date)
+            //         })
+            //         alertBox(alertModal, alertMsg, alertTitle, 'Termin je predložen!!!', 'Čestitamo!!!');
+            //     }
+            // })
+        
             const date = new Date();
-            db.collection('pojmovi').doc().set({
+            db.collection('predlozi').doc().set({
                 kategorija: category,
                 korisnik: localStorage.getItem('username'),
                 pocetnoSlovo: firstLetter,
                 pojam:fixedTerm,
                 vreme:firebase.firestore.Timestamp.fromDate(date)
             })
-            alertBox(alertModal, alertMsg, alertTitle, 'Termin uspešno unet u DB!!!', 'Čestitamo!!!');
+            alertBox(alertModal, alertMsg, alertTitle, 'Termin je predložen!!!', 'Čestitamo!!!');
+
         }
     })
     .catch((error) => {
@@ -51,6 +80,7 @@ const addTerm = (fixedTerm, firstLetter, category, inputCategory, alertModal, al
 addTermHandler.addEventListener('click', (event)=>{
     event.preventDefault();
     
+    if (inputCategory.value === 'Izaberi kategoriju...') return;
     if (inputText.value === '' || inputCategory.value === '' || inputText.value === ' ' || inputCategory.value === ' ') return ;
 
     const fixedTerm = fixInputValue (inputText); 
@@ -65,7 +95,7 @@ addTermHandler.addEventListener('click', (event)=>{
 
     const firstLetter = checkFirstLetter(fixedTerm);   
     
-    addTerm(fixedTerm, firstLetter, category, inputCategory, alertModal, alertMsg, alertTitle);
+    addTerm(fixedTerm, firstLetter, category, alertModal, alertMsg, alertTitle);
     
     addTermForm.reset();
 
@@ -74,7 +104,6 @@ addTermHandler.addEventListener('click', (event)=>{
 // pravila igre
 helpHandler.forEach(elem =>{
     elem.addEventListener('click', ()=>{
-        // console.log(renderHelp())
         helpModal.style.display = 'block';
         helpModal.innerHTML = renderHelp();
     })

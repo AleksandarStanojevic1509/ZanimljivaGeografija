@@ -28,7 +28,14 @@ class Game {
                     this.players[1].emit('answersForRender', arrObj);
                 }
             }) 
-        })    
+        })  
+
+        this.players.forEach((player) => {
+            player.on('clearSoket', () => {
+                player.disconnect()
+            });
+        });
+
 
     }
 
@@ -77,9 +84,10 @@ class Game {
     checkGameOver(){
         const turns = this.turns;
         if(turns[0]&& turns[1]){
-            // this.sendMsgToAll(`Kraj igre ${turns.join(' : ')}`)
-            this.turns = [null, null]
-            this.sendMsgToAll(`Nova partija!`)
+            this.turns = [null, null];
+            this.sendMsgToAll(`Nova partija!`);
+
+
         }
     }
 

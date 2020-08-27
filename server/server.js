@@ -25,36 +25,51 @@ let pickRandomLetter = () =>{
 }
 
 let waitingPlayer = null;
+let usr1;
 
-io.on("connection", (sock) => {
+io.on('connection', sock =>{
 
-    if (waitingPlayer) {
-        new Game(waitingPlayer, sock)
-        waitingPlayer = null;
-        let letter = pickRandomLetter();
-        io.emit('letter' , letter);             
-           
-    } else {
+    if(waitingPlayer){
+        sock.on('userName', usr2 =>{
+            if(usr1 === usr2 || usr1 === undefined){
+                usr1 = usr2;
+                waitingPlayer = sock;
+                waitingPlayer.emit("message", "Sačеkajte svog protivnika!");
+            }
+            else{
+                new Game(waitingPlayer, sock)
+                let letter = pickRandomLetter();
+                [waitingPlayer, sock].forEach(player=>{
+                    player.emit('letter' , letter);
+                })
+                waitingPlayer = null;
+                usr1 = undefined;
+            }
+        })
+    }
+    else{
         waitingPlayer = sock;
+        waitingPlayer.on('userName', user => {
+            usr1 = user;
+        })
         waitingPlayer.emit("message", "Sačеkajte svog protivnika!");
     }
 
-    // server dobija poruke od soketa (sock.on) i salje ih svima na serveru (io.emit)
+        // server dobija poruke od soketa (sock.on) i salje ih svima na serveru (io.emit)
     sock.on("message", (text) => {
         io.emit("message", text);
     });
 
     sock.on('disconnect', ()=>{
-        io.emit('oponentDisconnected', "Protivnik je napustio igru!");      
-        waitingPlayer = null;
-    })
- 
-});
-
+        io.emit('playerDisconneted', 'disc')
+        waitingPlayer = null 
+    });
+})
 
 server.on('error', err =>{
     console.error("Server error: ", err )
 })
+
 
 server.listen(8100, () =>{
     console.log('app started at 8100')

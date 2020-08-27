@@ -192,7 +192,8 @@ const renderResult = (data) =>{
         finalScore.children[0].innerHTML = `<p>${data[0].answ.name}: <span>${userPoints}</span></p>`;
         finalScore.children[1].innerHTML = `<p>${data[1].answ.name}: <span>${opponentPoints}</span></p>`;
         if(elem === "Predmet"){
-            declareWinner(userPoints, opponentPoints, data[0].answ.name, data[1].answ.name );            
+            declareWinner(userPoints, opponentPoints, data[0].answ.name, data[1].answ.name );
+                       
         }
         alertWinnerModal.style.display = 'grid';
         userNameTable.innerHTML = data[0].answ.name;
@@ -217,8 +218,6 @@ const renderResult = (data) =>{
 const ifDisconnected = (text) =>{
     writeEvent(text);
     document.querySelector('#alert-disconnect-bck').style.display = 'block';
-
-
 }
 
 
@@ -232,7 +231,20 @@ sock.on('answersForRender', renderResult);
 sock.on('letter',  (letter) =>{
     document.getElementById('random-letter-multi').innerHTML  = letter;
 })
-sock.on('oponentDisconnected', ifDisconnected)
+sock.emit('userName', localStorage.username);
+
+
+sock.on('playerDisconneted', () => {
+    sock.emit('clearSoket', 'cs');
+    ifDisconnected('Protivnik je napustio igru!')
+});
+
+// sock.on('oponentDisconnected', ifDisconnected)
+
+// sock.on('gameOver', ()=>{
+//     console.log('gameOver')
+//     sock.emit('disconnectPlayers', 'disconnect')
+// })
 
 // listeners.chat
 chatHanler.addEventListener('click', (event)=>{
@@ -254,7 +266,8 @@ multiAnswersForm.addEventListener('click', (event)=>{
     let playerAnswers = collectPlayerAnswers(formAnswers)
     sock.emit('answers', playerAnswers) 
     clearInterval(gameTime);
-
+    // form.reset()
+    
 })
 
 
@@ -268,6 +281,7 @@ alertWinnerModal.addEventListener('click', event => {
 
 // reset game
 resetGame.addEventListener('click', ()=>{
+    // sock.emit('disconnectPlayers', 'd')
     location.reload();
 })   
 
