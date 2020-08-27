@@ -235,7 +235,7 @@ sock.emit('userName', localStorage.username);
 
 
 sock.on('playerDisconneted', () => {
-    sock.emit('clearSoket', 'cs');
+    // sock.emit('clearSoket', 'cs');
     ifDisconnected('Protivnik je napustio igru!')
 });
 

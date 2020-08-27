@@ -30,11 +30,21 @@ class Game {
             }) 
         })  
 
-        this.players.forEach((player) => {
-            player.on('clearSoket', () => {
-                player.disconnect()
-            });
-        });
+        // this.players.forEach((player) => {
+        //     player.on('clearSoket', () => {
+        //         player.disconnect()
+        //     });
+        // });
+
+        this.players.forEach(player=>{
+            player.on('disconnect', ()=>{
+                this.players.forEach(sock =>{
+                    if(player !== sock){
+                        sock.emit('playerDisconneted', 'disc');
+                    }
+                })
+            })
+        })
 
 
     }

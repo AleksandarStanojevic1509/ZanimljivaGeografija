@@ -60,10 +60,10 @@ io.on('connection', sock =>{
         io.emit("message", text);
     });
 
-    sock.on('disconnect', ()=>{
-        io.emit('playerDisconneted', 'disc')
-        waitingPlayer = null 
-    });
+    // sock.on('disconnect', ()=>{
+    //     io.emit('playerDisconneted', 'disc')
+    //     waitingPlayer = null 
+    // });
 })
 
 server.on('error', err =>{
@@ -71,6 +71,6 @@ server.on('error', err =>{
 })
 
 
-server.listen(8100, () =>{
-    console.log('app started at 8100')
+server.listen(8110, () =>{
+    console.log('app started at 8110')
 })
