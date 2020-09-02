@@ -10,6 +10,8 @@ const alertModal = document.querySelector('#alert-modal-bck');
 const alertMsg = document.querySelector('#alert-modal-bck h5');
 const alertTitle = document.querySelector('#alert-modal-bck h3');
 const btnAlertClose = document.querySelector ('#alert button');
+const sound = document.querySelectorAll('.hover-sound-t');
+
 
 //dom.help
 const helpHandler = document.querySelectorAll('.help');
@@ -99,6 +101,16 @@ addTermHandler.addEventListener('click', (event)=>{
     
     addTermForm.reset();
 
+})
+
+//sound
+
+sound.forEach(elem =>{
+    elem.addEventListener('mouseenter', ()=>{
+        let sound = new Audio ('../sounds/hover.wav');
+        sound.volume = 0.2;
+        sound.play();
+    })
 })
 
 // pravila igre

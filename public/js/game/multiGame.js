@@ -15,6 +15,8 @@ const opponentNameTable = document.getElementById('opponent-table');
 const alertWinnerModal = document.getElementById('alert-winner-bck');
 const resetGame = document.querySelector('#result button');
 const playerForm = document.querySelector('#game-answers form');
+const sound = document.querySelectorAll('.hover-sound-t');
+
 
 
 //dom.help
@@ -24,7 +26,7 @@ const helpModal = document.getElementById('help-modal-bck');
 
 // Variables
 let gameTime;
-let countDown = 61;
+let countDown = 91;
 const category = ["Država", "Grad", "Reka", "Planina", "Životinja", "Biljka", "Predmet"];
 const sock = io();
 let user = localStorage.getItem('username');
@@ -58,6 +60,9 @@ const multiPlayerTimer = () => {
         let createTime = new Date (countDown * 1000);
         let sec = createTime.getMinutes()*60 + createTime.getSeconds() ; 
         if(sec < 10){
+            let sound = new Audio ('../sounds/timer.wav');
+            sound.volume = 0.5;
+            sound.play();
             document.querySelectorAll('.time-to-end').forEach(elem=>{
                 elem.innerHTML = `<span style="color:red">${sec}<span>`;
             })
@@ -299,6 +304,16 @@ closeChatHandler.addEventListener('click', ()=>{
     chatHandler.style.display = 'flex';
     document.getElementById('game-multi-chat').style.display = 'none';
 
+})
+
+//sound
+
+sound.forEach(elem =>{
+    elem.addEventListener('mouseenter', ()=>{
+        let sound = new Audio ('../sounds/hover.wav');
+        sound.volume = 0.2;
+        sound.play();
+    })
 })
 
 // pravila igre

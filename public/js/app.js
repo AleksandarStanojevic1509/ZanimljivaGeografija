@@ -12,6 +12,7 @@ const modalForm = document.querySelector('#log-in form');
 const inputValue = document.getElementById('username');
 const switchUserHandler = document.querySelectorAll('.sync');
 const closeAlertHandler = document.querySelector('#alert-modal-bck button');
+const sound = document.querySelectorAll('.hover-sound');
 
 //dom.help
 const helpHandler = document.querySelectorAll('.help');
@@ -105,7 +106,15 @@ closeAlertHandler.addEventListener('click', ()=>{
 // })
  
 
+//sound
 
+sound.forEach(elem =>{
+    elem.addEventListener('mouseenter', ()=>{
+        let sound = new Audio ('./sounds/hover.wav');
+        sound.volume = 0.2;
+        sound.play();
+    })
+})
 
 // pravila igre
 helpHandler.forEach(elem =>{

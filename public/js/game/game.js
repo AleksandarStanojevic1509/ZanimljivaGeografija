@@ -1,7 +1,9 @@
 import {fixInputValue} from '../general/general.js'
 
-const winnerTitle = document.querySelector ('#alert-winner h4')
-const winnerScore = document.querySelector ('#alert-winner h5')
+const winnerTitle = document.querySelector ('#alert-winner h4');
+const winnerScore = document.querySelector ('#alert-winner h5');
+const soundWinner = new Audio ('../sounds/winner.mp3');
+const soundTie = new Audio ('../sounds/tie.mp3');
 
 export const collectPlayerAnswers = (playerForm) =>{
     return [fixInputValue(playerForm.children[0].children[0]), 
@@ -28,14 +30,17 @@ export let resetData = (playerForm) =>{
 
 export const declareWinnerAlert = (playerTotalPoints, oponentTotalPoints, oponentTitle)=>{
     if(playerTotalPoints > oponentTotalPoints){
+        soundWinner.play();
         winnerTitle.innerHTML = `${localStorage.username} je pobedio!!!!`
         winnerScore.innerHTML = `Tvoj rezultat je: ${playerTotalPoints} poena.`
     }
     else if(playerTotalPoints < oponentTotalPoints){
+        soundWinner.play();
         winnerTitle.innerHTML = `${oponentTitle} je pobedio!!!!` 
         winnerScore.innerHTML = `Njegov rezultat je: ${oponentTotalPoints} poena.`
     }
     else if(playerTotalPoints === oponentTotalPoints){
+        soundTie.play();
         winnerTitle.innerHTML = `Nerešeno je!!!`
         winnerScore.innerHTML = `Možete da pokušate ponovo.`
     }  
@@ -43,14 +48,17 @@ export const declareWinnerAlert = (playerTotalPoints, oponentTotalPoints, oponen
 
 export const declareWinner = (userTotalPoints, opponentTotalPoints, userTitle, opponentTitle)=>{
     if(userTotalPoints > opponentTotalPoints){
+        soundWinner.play();
         winnerTitle.innerHTML = `${userTitle} je pobednik!!!!`;
         winnerScore.innerHTML = `Osvojio je: ${userTotalPoints} poena.`;
     }
     else if(userTotalPoints < opponentTotalPoints){
+        soundWinner.play();
         winnerTitle.innerHTML = `${opponentTitle} je pobednik!!!!` 
         winnerScore.innerHTML = `Osvojio je: ${opponentTotalPoints} poena.`;
     }
     else if(userTotalPoints === opponentTotalPoints){
+        soundTie.play();
         winnerTitle.innerHTML = `Nerešeno je!!!`;
         winnerScore.innerHTML = `Možete da pokušate ponovo.`;
     }  

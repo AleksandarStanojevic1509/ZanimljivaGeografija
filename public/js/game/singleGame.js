@@ -12,6 +12,8 @@ const resultBackgound = document.getElementById('result-bck');
 const alertWinnerModal = document.querySelector('#alert-winner-bck');
 // const closeResultHandler = document.getElementById('close-res');
 const resetGame = document.querySelector('#result button');
+const sound = document.querySelectorAll('.hover-sound-t');
+
 
 //dom.help
 const helpHandler = document.querySelectorAll('.help');
@@ -21,7 +23,7 @@ const helpModal = document.getElementById('help-modal-bck');
 
 // Variables
 let gameTime;
-let countDown = 61;
+let countDown = 91;
 let userPoints = 0;
 let opponentPoints = 0;
 
@@ -39,7 +41,7 @@ const singlPlayerTimer = () => {
             resultBackgound.style.display = 'block';
             // reset countDown Time 
             clearInterval(gameTime);
-            countDown = 61;
+            countDown = 91;
             // resetData(userAnswersBox, playerForm);
         }
     else {
@@ -47,6 +49,9 @@ const singlPlayerTimer = () => {
         let createTime = new Date (countDown * 1000);
         let sec = createTime.getMinutes()*60 + createTime.getSeconds() ; 
         if(sec < 10){
+            let sound = new Audio ('../sounds/timer.wav');
+            sound.volume = 0.5;
+            sound.play();
             document.querySelectorAll('.time-to-end').forEach(elem=>{
                 elem.innerHTML = `<span style="color:red">${sec}<span>`;
             })
@@ -220,7 +225,7 @@ window.addEventListener('load', ()=>{
 singleGameSubmitBtn.addEventListener('click', (event)=>{
     event.preventDefault();   
     clearInterval(gameTime);
-    countDown = 61; 
+    countDown = 91; 
 
     getWinnerSingleGame(playerForm);
     resultBackgound.style.display = 'block';  
@@ -246,6 +251,16 @@ alertWinnerModal.addEventListener('click', event => {
 resetGame.addEventListener('click', ()=>{
     location.reload();
 })   
+
+//sound
+
+sound.forEach(elem =>{
+    elem.addEventListener('mouseenter', ()=>{
+        let sound = new Audio ('../sounds/hover.wav');
+        sound.volume = 0.2;
+        sound.play();
+    })
+})
 
 // pravila igre
 helpHandler.forEach(elem =>{

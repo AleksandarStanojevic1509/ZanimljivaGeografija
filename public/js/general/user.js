@@ -14,7 +14,8 @@ export const showModal = (modalForm, inputValue, modal)=>{
             event.preventDefault();
             localStorage.setItem('username', `${inputValue.value}`); 
             modal.style.display = 'block';            
-            location.reload()
+            // location.reload();
+            window.location.href = '../index.html'
         }
     })    
 }
