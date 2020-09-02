@@ -35,6 +35,9 @@ io.on('connection', sock =>{
                 usr1 = usr2;
                 waitingPlayer = sock;
                 waitingPlayer.emit("message", "Sačеkajte svog protivnika!");
+                sock.on('disconnect', () => {
+                    usr1 = undefined;
+                });
             }
             else{
                 new Game(waitingPlayer, sock)
@@ -71,6 +74,6 @@ server.on('error', err =>{
 })
 
 
-server.listen(8110, () =>{
-    console.log('app started at 8110')
+server.listen(8100, () =>{
+    console.log('app started at 8100')
 })
