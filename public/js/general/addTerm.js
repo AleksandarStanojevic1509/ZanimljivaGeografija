@@ -17,6 +17,10 @@ const sound = document.querySelectorAll('.hover-sound-t');
 const helpHandler = document.querySelectorAll('.help');
 const helpModal = document.getElementById('help-modal-bck');
 
+// variable
+const soundWinner = new Audio ('../sounds/winner.mp3');
+const soundTie = new Audio ('../sounds/tie.mp3');
+
 
 const addTerm = (fixedTerm, firstLetter, category, alertModal, alertMsg, alertTitle) =>{
 
@@ -28,6 +32,7 @@ const addTerm = (fixedTerm, firstLetter, category, alertModal, alertMsg, alertTi
     .then((querySnapshot) => {
         if (querySnapshot.size > 0) {
             querySnapshot.docs.forEach((doc) => {
+            soundTie.play();
             alertBox(alertModal, alertMsg, alertTitle, 'Termin već postoji!!!', 'Oops...');
             }) 
         }
@@ -68,6 +73,7 @@ const addTerm = (fixedTerm, firstLetter, category, alertModal, alertMsg, alertTi
                 pojam:fixedTerm,
                 vreme:firebase.firestore.Timestamp.fromDate(date)
             })
+            soundWinner.play();
             alertBox(alertModal, alertMsg, alertTitle, 'Termin je predložen!!!', 'Čestitamo!!!');
 
         }
